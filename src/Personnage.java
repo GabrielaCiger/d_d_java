@@ -9,7 +9,7 @@ public class Personnage {
     EquipementDefensif equipmentDefensif;
 
     /* ! Should I add a position in here? And update it through the function? */
-    int position = 1;
+//    int position = 1;
 
     /* * SETTERS */
     public void setName(String name) {
