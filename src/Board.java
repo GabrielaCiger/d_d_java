@@ -6,7 +6,7 @@ public class Board {
     Personnage personnage;
     int playerPosition = 1;
 
-    ArrayList<String> boardCases = new ArrayList<String>();
+    ArrayList<String> boardCases = new ArrayList<>();
 
     public Board(Personnage personnage) {
         this.personnage = personnage;

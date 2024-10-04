@@ -8,9 +8,6 @@ public class Personnage {
     EquipementOffensif equipmentOffensive;
     EquipementDefensif equipmentDefensif;
 
-    /* ! Should I add a position in here? And update it through the function? */
-//    int position = 1;
-
     /* * SETTERS */
     public void setName(String name) {
         this.name = name;
@@ -21,25 +18,25 @@ public class Personnage {
                 this.type = "warrior";
                 this.life = 10;
                 this.attackStrength = 10;
-                this.equipmentOffensive = new EquipementOffensif("arme");
-                this.equipmentDefensif = new EquipementDefensif("bouclier");
+                this.equipmentOffensive = new EquipementOffensif("weapon");
+                this.equipmentDefensif = new EquipementDefensif("shield");
                 break;
 
             case "wizard":
                 this.type = "wizard";
                 this.life = 6;
                 this.attackStrength = 15;
-                this.equipmentOffensive = new EquipementOffensif("sort");
-                this.equipmentDefensif = new EquipementDefensif("philtre");
+                this.equipmentOffensive = new EquipementOffensif("spell");
+                this.equipmentDefensif = new EquipementDefensif("potion");
                 break;
 
             default:
-                System.out.println("[You babbled something, you're a warrior, remember?]");
+                System.out.println("[Unknown class]");
                 this.type = "warrior";
                 this.life = 10;
                 this.attackStrength = 10;
-                this.equipmentOffensive = new EquipementOffensif("arme");
-                this.equipmentDefensif = new EquipementDefensif("bouclier");
+                this.equipmentOffensive = new EquipementOffensif("weapon");
+                this.equipmentDefensif = new EquipementDefensif("shield");
                 break;
         }
     }
