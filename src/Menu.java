@@ -1,4 +1,5 @@
 import Personnages.Personnage;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -6,7 +7,7 @@ public class Menu {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_PURPLE = "\u001B[35m";
-
+    public static final String red = "\u001B[31m";
 
     public static void wait(int ms) {
         try {
@@ -18,23 +19,23 @@ public class Menu {
 
     public Integer displayMenu() {
         Scanner in = new Scanner(System.in);
-        System.out.println("        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣤⡼⠀⢀⡀⣀⢱⡄⡀⠀⠀⠀⢲⣤⣤⣤⣤⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+        System.out.println(red + "        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣤⡼⠀⢀⡀⣀⢱⡄⡀⠀⠀⠀⢲⣤⣤⣤⣤⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
         System.out.println("⠀⠀⠀⠀⠀      ⠀⠀⠀⠀⣠⣴⣾⣿⣿⣿⣿⣿⡿⠛⠋⠁⣤⣿⣿⣿⣧⣷⠀⠀⠘⠉⠛⢻⣷⣿⣽⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀");
         System.out.println("⠀⠀⠀⠀⠀      ⠀⢀⣴⣞⣽⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠠⣿⣿⡟⢻⣿⣿⣇⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣟⢦⡀⠀⠀⠀⠀⠀⠀");
         System.out.println("⠀⠀⠀⠀⠀     ⣠⣿⡾⣿⣿⣿⣿⣿⠿⣻⣿⣿⡀⠀⠀⠀⢻⣿⣷⡀⠻⣧⣿⠆⠀⠀⠀⠀⣿⣿⣿⡻⣿⣿⣿⣿⣿⠿⣽⣦⡀⠀⠀⠀⠀");
         System.out.println("⠀⠀⠀⠀      ⣼⠟⣩⣾⣿⣿⣿⢟⣵⣾⣿⣿⣿⣧⠀⠀⠀⠈⠿⣿⣿⣷⣈⠁⠀⠀⠀⠀⣰⣿⣿⣿⣿⣮⣟⢯⣿⣿⣷⣬⡻⣷⡄⠀⠀⠀");
-        System.out.println("       ⠀⢀⡜⣡⣾⣿⢿⣿⣿⣿ ============================ ⢯⣿⣿⣷⣬⡻⣷⡄      ");
-        System.out.println("       ⡜⣡⣾⣿⢿⣿⣿⣿⣿  |     D&D (Java edition)   |  ⠈⠻⣆⠙⣿⣜⠆⠀");
-        System.out.println("      ⡜⣡⣾⣿⢿⣿⣿⣿⣿   ============================    ⠈⠙⢾⣆⠈⣷");
-        System.out.println("      ⢯⣿⠏⣠⠞⠋⣠⡿⠋    Type the number:                    ⠃⢸");
-        System.out.println("       ⣸⠇⢠⣷⠞             1 < New game (story)        ");
-        System.out.println("       ⣸⠇⢠⣷                2 < Skip intro        ");
-        System.out.println("       ⡟⠀⡿⠁                  3 < Exit  ");
-        System.out.println("                    ============================");
-        System.out.println("                              ⠙⠻⠿⠿⠋⠀⢻⣿⡄");
-        System.out.println("                            ⣿⣿  ⣴⣶⣤⡀⢸⣿⠇⠀");
+        System.out.println("       ⠀⢀⡜⣡⣾⣿⢿⣿⣿⣿" + ANSI_RESET + "  ============================" + red +"  ⢯⣿⣿⣷⣬⡻⣷⡄      ");
+        System.out.println("       ⡜⣡⣾⣿⢿⣿⣿⣿⣿" + ANSI_RESET +"   |     D&D (Java edition)   |" + red +"  ⠈⠻⣆⠙⣿⣜⠆⠀");
+        System.out.println("      ⡜⣡⣾⣿⢿⣿⣿⣿⣿" + ANSI_RESET +"    ============================" + red +"    ⠈⠙⢾⣆⠈⣷");
+        System.out.println("      ⢯⣿⠏⣠⠞⠋⣠⡿⠋" + ANSI_RESET +"    Type the number: " + red +"                   ⠃⢸");
+        System.out.println("       ⣸⠇⢠⣷⠞"+ ANSI_RESET+"             1 < New game (story)        " + red);
+        System.out.println("       ⣸⠇⢠⣷"+ ANSI_RESET+"                2 < Skip intro        "+ red);
+        System.out.println("       ⡟⠀⡿⠁"+ANSI_RESET+"                  3 < Exit  ");
+        System.out.println("                     ============================");
+        System.out.println(red +"                              ⠙⠻⠿⠿⠋⠀⢻⣿⡄");
+        System.out.println("                          ⠈⠻⣿  ⣴⣶⣤⡀ ⢸⣿⠇⠀");
         System.out.println("                            ⢸⡇⠀⠈⣿⣼⡟");
-        System.out.println("                            ⠈⠻⠶⣶⡟⠋");
+        System.out.println("                            ⠈⠻⠶⣶⡟⠋"+ANSI_RESET);
         return in.nextInt();
     }
 
@@ -87,15 +88,7 @@ public class Menu {
         System.out.println(ANSI_BLUE + "Duncan" + ANSI_RESET + ": I'm Duncan, not that you will need to remember my name. Let me see, how strong you are. ");
 
         wait(1100);
-        System.out.println();
-        System.out.println("============================");
-        System.out.println("  " + ANSI_GREEN + name + ANSI_RESET + "  ");
-        System.out.println("============================");
-        System.out.println("| HP: " + personnage.getLife());
-        System.out.println("| Attack level : " + personnage.getAttackStrength());
-        System.out.println("| Damage : " + personnage.getEquipmentOffensive().getWeaponName() + "(+" + personnage.getEquipmentOffensive().getAttackLevel() + ")");
-        System.out.println("| Defense : " + personnage.getEquipmentDefensif().getDefenseWeaponName() + "(+" + personnage.getEquipmentDefensif().getDefenseLevel() + ")");
-        System.out.println("============================");
+        System.out.println(personnage.showPlayerStats());
 
         wait(2800);
         System.out.println();
@@ -145,32 +138,47 @@ public class Menu {
         System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
     }
 
-    public void quitGame(String name) {
+    public boolean quitGame(String name) {
         String goodbyeMessage = "Goodbye";
         if (!name.isEmpty()) {
             goodbyeMessage += " " + name;
         }
         goodbyeMessage += " !";
-        System.out.println(goodbyeMessage);
-        System.exit(0);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Are you sure, that you want to quit? (y/n)");
+        String response = sc.nextLine().toLowerCase().trim();
+        if (response.contains("y")) {
+            System.out.println(goodbyeMessage);
+            System.exit(0);
+        } else {
+            return false;
+        }
+        return false;
     }
-
 
     public String getPlayerName() {
         /* ! SET NAME*/
         Scanner sc = new Scanner(System.in);
+        String name;
         System.out.println(ANSI_BLUE + "Unknown man" + ANSI_RESET + ": Hello there, foreign traveler. What's your name?");
-        String name = sc.nextLine();
+        do {
+            name = sc.nextLine().trim();
+            if (name.isEmpty()) {
+                System.out.println("[Input can't be empty. Choose a name.]");
+            }
+        } while (name.isEmpty());
         System.out.println(ANSI_GREEN + name + ANSI_RESET + ": Hello, my name is " + name + ". ");
-        System.out.println(ANSI_BLUE + "Unknown man" + ANSI_RESET + ": Nice to meet you, " + name + ". What are you doing here ?");
+        System.out.println(ANSI_BLUE + "Unknown man" + ANSI_RESET + ": Nice to meet you, " + name + ".");
         return name;
     }
 
-    public String getPlayerType(String name) {
+    public String getPlayerType() {
         Scanner sc = new Scanner(System.in);
         String type;
 
         while (true) {
+            System.out.println();
+            System.out.println(ANSI_BLUE + "Unknown man" + ANSI_RESET + ": What are you doing here?");
             System.out.println("[Choose your class. Type " + ANSI_GREEN + "wizard" + ANSI_RESET + " or " + ANSI_GREEN + "warrior" + ANSI_RESET + ". Type " + ANSI_BLUE + "help" + ANSI_RESET + " to see classes info.]");
             String answer = sc.nextLine().trim().toLowerCase();
 
@@ -188,7 +196,7 @@ public class Menu {
         return type;
     }
 
-    public boolean startGame(String name) {
+    public boolean validateContinue(String name) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Are you sure, " + name + ", that you want to continue? (y/n)");
         String response = sc.nextLine().toLowerCase().trim();
@@ -198,54 +206,93 @@ public class Menu {
         return true;
     }
 
-    public void showThrow(int diceThrow) {
-        System.out.println("You throw the magic dice. You see the dice rolling, when suddenly... it stops...");
-        Menu.wait(4000);
-        switch (diceThrow) {
+    public Integer changePlayer() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("[What do you want to change?]");
+        System.out.println("1 < Change the name");
+        System.out.println("2 < Change the type");
+        System.out.println("3 < Continue without changing.");
+        System.out.println("4 < Quit game.");
+        return sc.nextInt();
+    }
+
+    public String[] changePlayerSettings(int choice, String name, String type) {
+        switch (choice) {
             case 1:
-                System.out.println(" +-------+ ");
-                System.out.println(" |       | ");
-                System.out.println(" |   O   | ");
-                System.out.println(" |       | ");
-                System.out.println(" +-------+ ");
+                name = getPlayerName();
                 break;
             case 2:
-                System.out.println(" +-------+ ");
-                System.out.println(" | O     | ");
-                System.out.println(" |       | ");
-                System.out.println(" |     O | ");
-                System.out.println(" +-------+ ");
-                break;
-            case 3:
-                System.out.println(" +-------+ ");
-                System.out.println(" | O     | ");
-                System.out.println(" |   O   | ");
-                System.out.println(" |     O | ");
-                System.out.println(" +-------+ ");
+                type = getPlayerType();
                 break;
             case 4:
-                System.out.println(" +-------+ ");
-                System.out.println(" | O   O | ");
-                System.out.println(" |       | ");
-                System.out.println(" | O   O | ");
-                System.out.println(" +-------+ ");
+                quitGame(name);
                 break;
-            case 5:
-                System.out.println(" +-------+ ");
-                System.out.println(" | O   O | ");
-                System.out.println(" |   O   | ");
-                System.out.println(" | O   O | ");
-                System.out.println(" +-------+ ");
-                break;
-            case 6:
-                System.out.println(" +-------+ ");
-                System.out.println(" | O   O | ");
-                System.out.println(" | 0   0 | ");
-                System.out.println(" | O   O | ");
-                System.out.println(" +-------+ ");
+            default:
                 break;
         }
-        Menu.wait(1500);
+        return new String[]{name, type};
+    }
+
+    public Integer newRound() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑");
+        System.out.println("     What do you want to do?");
+        System.out.println("     -----------------------");
+        System.out.println("        1 < Throw dice.");
+        System.out.println("        2 < Show stats.");
+        System.out.println("        3 < Quit adventure.");
+        System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
+        return sc.nextInt();
+    }
+
+    public void showThrow(int diceThrow) {
+        System.out.println("┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑");
+        System.out.println("You throw the magic dice. You see the dice rolling, when suddenly... it stops...");
+        switch (diceThrow) {
+            case 1:
+                System.out.println("    +-------+ ");
+                System.out.println("    |       | ");
+                System.out.println("    |   O   | ");
+                System.out.println("    |       | ");
+                System.out.println("    +-------+ ");
+                break;
+            case 2:
+                System.out.println("    +-------+ ");
+                System.out.println("    | O     | ");
+                System.out.println("    |       | ");
+                System.out.println("    |     O | ");
+                System.out.println("    +-------+ ");
+                break;
+            case 3:
+                System.out.println("    +-------+ ");
+                System.out.println("    | O     | ");
+                System.out.println("    |   O   | ");
+                System.out.println("    |     O | ");
+                System.out.println("    +-------+ ");
+                break;
+            case 4:
+                System.out.println("    +-------+ ");
+                System.out.println("    | O   O | ");
+                System.out.println("    |       | ");
+                System.out.println("    | O   O | ");
+                System.out.println("    +-------+ ");
+                break;
+            case 5:
+                System.out.println("    +-------+ ");
+                System.out.println("    | O   O | ");
+                System.out.println("    |   O   | ");
+                System.out.println("    | O   O | ");
+                System.out.println("    +-------+ ");
+                break;
+            case 6:
+                System.out.println("    +-------+ ");
+                System.out.println("    | O   O | ");
+                System.out.println("    | 0   0 | ");
+                System.out.println("    | O   O | ");
+                System.out.println("    +-------+ ");
+                break;
+        }
+        System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
     }
 
     public boolean validateChoices() {
@@ -255,6 +302,27 @@ public class Menu {
         if (answer.equals("y") || answer.equals("ye") || answer.equals("yes")) {
             return true;
         }
+        System.out.println("[Player creation failed. Starting again...]");
         return false;
+    }
+
+    public void changeName(Personnage personnage) {
+        System.out.println("[Enter new name.]");
+        Scanner sc = new Scanner(System.in);
+        String newName = sc.nextLine();
+        try {
+            personnage.setName(newName);
+        } catch (Exception e) {
+            System.out.println("Error's occured while trying to change the name of the player.");
+        }
+    }
+
+    public void changeType(Personnage personnage) {
+        String newType = getPlayerType();
+        try {
+            personnage.setType(newType);
+        } catch (Exception e) {
+            System.out.println("Error's occured while trying to change the name of the player.");
+        }
     }
 }

@@ -3,8 +3,13 @@ package Equipement;
 import java.security.PublicKey;
 
 public class EquipementOffensif {
-    String name;
-    int attackLevel;
+    protected String name;
+    protected int attackLevel;
+
+    public EquipementOffensif() {
+        this.name = "Attack weapon";
+        this.attackLevel = 0;
+    }
 
     public EquipementOffensif(String name) {
         this.name = name;

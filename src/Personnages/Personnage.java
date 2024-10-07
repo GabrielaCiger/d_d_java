@@ -2,13 +2,15 @@ package Personnages;
 import Equipement.EquipementOffensif;
 import Equipement.EquipementDefensif;
 
-public class Personnage {
-    String type;
-    String name;
-    int life;
-    int attackStrength;
-    EquipementOffensif equipmentOffensive;
-    EquipementDefensif equipmentDefensif;
+public abstract class Personnage {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    protected String type;
+    protected String name;
+    protected int life;
+    protected int attackStrength;
+    protected EquipementOffensif equipmentOffensive;
+    protected EquipementDefensif equipmentDefensif;
 
     /* * SETTERS */
     public void setName(String name) {
@@ -19,56 +21,47 @@ public class Personnage {
         }
     }
     public void setType(String type) {
-        switch (type) {
-            case "warrior":
-                this.type = "warrior";
-                this.life = 10;
-                this.attackStrength = 10;
-                this.equipmentOffensive = new EquipementOffensif("weapon");
-                this.equipmentDefensif = new EquipementDefensif("shield");
-                break;
+        this.type = type;
+    }
 
-            case "wizard":
-                this.type = "wizard";
-                this.life = 6;
-                this.attackStrength = 15;
-                this.equipmentOffensive = new EquipementOffensif("spell");
-                this.equipmentDefensif = new EquipementDefensif("potion");
-                break;
+    public void setLife(int life) {
+        this.life = life;
+    }
 
-            default:
-                System.out.println("[Unknown class]");
-                this.type = "warrior";
-                this.life = 10;
-                this.attackStrength = 10;
-                this.equipmentOffensive = new EquipementOffensif("weapon");
-                this.equipmentDefensif = new EquipementDefensif("shield");
-                break;
-        }
+    public void setAttackStrength(int strength) {
+        this.attackStrength = strength;
+    }
+
+    public void newEquipementDefensif(EquipementDefensif newDefensif) {
+        this.equipmentDefensif = newDefensif;
+    }
+
+    public void newEquipementOffensive(EquipementOffensif newWeapon) {
+        this.equipmentOffensive = newWeapon;
     }
 
     /* ? GETTERS */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
     public int getLife() {
-        return life;
+        return this.life;
     }
 
     public int getAttackStrength() {
-        return attackStrength;
+        return this.attackStrength;
     }
 
     public EquipementOffensif getEquipmentOffensive() {
-        return equipmentOffensive;
+        return this.equipmentOffensive;
     }
 
     public EquipementDefensif getEquipmentDefensif() {
-        return equipmentDefensif;
+        return this.equipmentDefensif;
     }
 
     /* ! CONSTRUCTORS: */
@@ -81,6 +74,23 @@ public class Personnage {
     public Personnage(String name, String type) {
         setName(name);
         setType(type);
+    }
+    public String showPlayerStats() {
+        return "\n" +
+                "============================\n" +
+                "  " + ANSI_GREEN + this.getName() + ANSI_RESET + "  \n" +
+                "============================\n" +
+                "| HP: " + this.getLife() + "\n" +
+                "| Attack level: " + this.getAttackStrength() + "\n" +
+                "| Damage: " +
+                (this.getEquipmentOffensive() != null ?
+                        this.getEquipmentOffensive().getWeaponName() + "(+" + this.getEquipmentOffensive().getAttackLevel() + ")" :
+                        "[No weapon equipped]") + "\n" +
+                "| Defense: " +
+                (this.getEquipmentDefensif() != null ?
+                        this.getEquipmentDefensif().getDefenseWeaponName() + "(+" + this.getEquipmentDefensif().getDefenseLevel() + ")" :
+                        "[No defense]") + "\n" +
+                "============================\n";
     }
 
 }

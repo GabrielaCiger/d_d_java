@@ -10,7 +10,7 @@ public class Board {
     Personnage personnage;
     int playerPosition = 1;
 
-    ArrayList<String> boardCases = new ArrayList<>();
+    ArrayList<Case> boardCases = new ArrayList<>();
 
     public Board(Personnage personnage) {
         this.personnage = personnage;
@@ -18,11 +18,15 @@ public class Board {
     }
 
     public Integer getBoardSize() {
-        return boardSize;
+        return this.boardSize;
     }
 
     public Integer getPlayerPosition() {
-        return playerPosition;
+        return this.playerPosition;
+    }
+
+    public void setPlayerPosition(Integer newPlayerPosition) {
+        this.playerPosition = newPlayerPosition;
     }
 
     public int throwDice() {
@@ -35,8 +39,14 @@ public class Board {
             System.out.println("Game ends.");
             return;
         }
-        String currentCase = boardCases.get(playerPosition);
-        System.out.println("Current case value: " + currentCase);
+        Case currentCase = boardCases.get(playerPosition);
+        System.out.println("Current case value: " + currentCase.getValue());
+        if (currentCase instanceof BonusCase) {
+            currentCase.doAction();
+            ((BonusCase) currentCase).getNewWeapon(personnage);
+        } else {
+            currentCase.doAction();
+        }
     }
 
     public int getRandomPosition() {
@@ -44,23 +54,22 @@ public class Board {
     }
 
     public void populateBoard() {
+        BasicCase basicCase = new BasicCase();
         for (int i = 0; i < boardSize; i++) {
-            boardCases.add(i, "Nothing special");
+            boardCases.add(i, basicCase);
         }
         List<Integer> specialCases = new ArrayList<Integer>();
-        addSpecialCase("Goblin", specialCases);
-        addSpecialCase("Dragon", specialCases);
-        addSpecialCase("Evil mage", specialCases);
-        addSpecialCase("Tower", specialCases);
-        addSpecialCase("Market", specialCases);
+        for (int j = 0; j < 5; j++) {
+            addSpecialCase(new BonusCase(personnage), specialCases);
+        }
     }
 
-    public void addSpecialCase(String specialCase, List alreadyPopulated) {
+    public void addSpecialCase(Case specialCase, List<Integer> alreadyPopulated) {
         int position;
         do {
             position = getRandomPosition();
-        } while (alreadyPopulated.contains(position));
+        } while (alreadyPopulated.contains(position) || position >= boardSize);
         alreadyPopulated.add(position);
-        boardCases.add(position, specialCase);
+        boardCases.set(position, specialCase);
     }
 }

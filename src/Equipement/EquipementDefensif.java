@@ -1,12 +1,16 @@
 package Equipement;
 
 public class EquipementDefensif {
-    String name;
-    int defenseLevel;
+    protected String name;
+    protected int defenseLevel;
+
+    public EquipementDefensif() {
+        this.name = "Defense weapon";
+    }
 
     public EquipementDefensif(String name) {
         this.name = name;
-        setDefenseLevel(name);
+        this.defenseLevel = 0;
     }
 
     public String getDefenseWeaponName() {
@@ -14,14 +18,5 @@ public class EquipementDefensif {
     }
     public int getDefenseLevel() {
         return defenseLevel;
-    }
-    public void setDefenseLevel(String name){
-        switch (name){
-            case "shield": this.defenseLevel = 3;
-                break;
-            case "potion" : this.defenseLevel = 2;
-                break;
-            default: this.defenseLevel = 0;
-        }
     }
 }
