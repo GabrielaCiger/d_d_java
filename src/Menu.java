@@ -1,3 +1,4 @@
+import Personnages.Personnage;
 import java.util.Scanner;
 
 public class Menu {
@@ -77,9 +78,10 @@ public class Menu {
 
     public void outro(Personnage personnage) {
         Scanner sc = new Scanner(System.in);
-        System.out.println(ANSI_GREEN + personnage.name + ANSI_RESET + ": I'm a " + personnage.type + ".");
+        String name = personnage.getName();
+        System.out.println(ANSI_GREEN + name + ANSI_RESET + ": I'm a " + personnage.getType() + ".");
         wait(1500);
-        System.out.println(ANSI_BLUE + "Unknown man" + ANSI_RESET + ": So you are " + personnage.name + ", another damned " + personnage.type + " from the prophecy! It's an honour, by the way.");
+        System.out.println(ANSI_BLUE + "Unknown man" + ANSI_RESET + ": So you are " + name + ", another damned " + personnage.getType() + " from the prophecy! It's an honour, by the way.");
         System.out.println("But there were many before you, and there will be many after you. Or maybe you are the chosen one. What do I know, I'm just a silly old man.");
         wait(2000);
         System.out.println(ANSI_BLUE + "Duncan" + ANSI_RESET + ": I'm Duncan, not that you will need to remember my name. Let me see, how strong you are. ");
@@ -87,12 +89,12 @@ public class Menu {
         wait(1100);
         System.out.println();
         System.out.println("============================");
-        System.out.println("  " + ANSI_GREEN + personnage.name + ANSI_RESET + "  ");
+        System.out.println("  " + ANSI_GREEN + name + ANSI_RESET + "  ");
         System.out.println("============================");
-        System.out.println("| HP: " + personnage.life);
-        System.out.println("| Attack level : " + personnage.attackStrength);
-        System.out.println("| Damage : " + personnage.equipmentOffensive.name + "(+" + personnage.equipmentOffensive.attackLevel + ")");
-        System.out.println("| Defense : " + personnage.equipmentDefensif.name + "(+" + personnage.equipmentDefensif.defenseLevel + ")");
+        System.out.println("| HP: " + personnage.getLife());
+        System.out.println("| Attack level : " + personnage.getAttackStrength());
+        System.out.println("| Damage : " + personnage.getEquipmentOffensive().getWeaponName() + "(+" + personnage.getEquipmentOffensive().getAttackLevel() + ")");
+        System.out.println("| Defense : " + personnage.getEquipmentDefensif().getDefenseWeaponName() + "(+" + personnage.getEquipmentDefensif().getDefenseLevel() + ")");
         System.out.println("============================");
 
         wait(2800);
@@ -106,20 +108,20 @@ public class Menu {
         System.out.println("2 < Stay silent.");
         String answer = sc.nextLine();
         if (answer.equals("1")) {
-            System.out.println(ANSI_GREEN + personnage.name + ANSI_RESET + ": What do you mean by that?");
+            System.out.println(ANSI_GREEN + name + ANSI_RESET + ": What do you mean by that?");
             wait(1000);
             System.out.println(ANSI_BLUE + "Duncan" + ANSI_RESET + ": When were you born, yesterday? Whole kingdom is suffering... Goblins stealing and murdering,");
             System.out.println("evil mages fighting for power, dragons for God's sake, those are the worst.");
             wait(5000);
             System.out.println("Horrifying flying lizards. You might be our last chance. Fulfill the prophecy and reach the Temple.");
-            System.out.println(ANSI_GREEN + personnage.name + ANSI_RESET + ": What temple? Why is it so important?");
+            System.out.println(ANSI_GREEN + name + ANSI_RESET + ": What temple? Why is it so important?");
             wait(4000);
             System.out.println(ANSI_BLUE + "Duncan" + ANSI_RESET + ": The Temple protects the meaning of life. You must find it.");
             System.out.println("[His hands start to shake. He looks nervous and scared.]");
         }
         wait(2500);
         System.out.println(ANSI_BLUE + "Duncan" + ANSI_RESET + ": Go and find... the Temple. You have to...");
-        System.out.println(ANSI_GREEN + personnage.name + ANSI_RESET + ": I'll do my best. But how can I find it?");
+        System.out.println(ANSI_GREEN + name + ANSI_RESET + ": I'll do my best. But how can I find it?");
         System.out.println("[Duncan thinks. After a while he reaches deep down in his pocket and takes something out of it.]");
         wait(4000);
         System.out.println(ANSI_BLUE + "Duncan" + ANSI_RESET + ": Take this. It will lead you to the temple... or to your death.");
@@ -136,7 +138,7 @@ public class Menu {
         System.out.println("   [ You obtained : " + ANSI_PURPLE + "Magic dice" + ANSI_RESET + ". ]   ");
         wait(3000);
         System.out.println(ANSI_BLUE + "Duncan" + ANSI_RESET + ": It's all I can do. Now go. GET OUT OF HERE!");
-        System.out.println(ANSI_GREEN + personnage.name + ANSI_RESET + ": Thank you, Duncan.");
+        System.out.println(ANSI_GREEN + name + ANSI_RESET + ": Thank you, Duncan.");
         System.out.println();
         System.out.println("[You left the tavern.]");
         System.out.println();
@@ -152,7 +154,6 @@ public class Menu {
         System.out.println(goodbyeMessage);
         System.exit(0);
     }
-
 
 
     public String getPlayerName() {

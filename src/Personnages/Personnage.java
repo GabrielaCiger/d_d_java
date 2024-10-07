@@ -1,4 +1,6 @@
-import java.util.Scanner;
+package Personnages;
+import Equipement.EquipementOffensif;
+import Equipement.EquipementDefensif;
 
 public class Personnage {
     String type;
@@ -10,7 +12,11 @@ public class Personnage {
 
     /* * SETTERS */
     public void setName(String name) {
-        this.name = name;
+        if (name.isEmpty()) {
+            this.name = "Henry Cavill [default]";
+        } else {
+            this.name = name;
+        }
     }
     public void setType(String type) {
         switch (type) {
@@ -39,6 +45,30 @@ public class Personnage {
                 this.equipmentDefensif = new EquipementDefensif("shield");
                 break;
         }
+    }
+
+    /* ? GETTERS */
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+    public int getLife() {
+        return life;
+    }
+
+    public int getAttackStrength() {
+        return attackStrength;
+    }
+
+    public EquipementOffensif getEquipmentOffensive() {
+        return equipmentOffensive;
+    }
+
+    public EquipementDefensif getEquipmentDefensif() {
+        return equipmentDefensif;
     }
 
     /* ! CONSTRUCTORS: */

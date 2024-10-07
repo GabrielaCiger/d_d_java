@@ -1,3 +1,5 @@
+package Equipement;
+
 public class EquipementDefensif {
     String name;
     int defenseLevel;
@@ -7,6 +9,12 @@ public class EquipementDefensif {
         setDefenseLevel(name);
     }
 
+    public String getDefenseWeaponName() {
+        return name;
+    }
+    public int getDefenseLevel() {
+        return defenseLevel;
+    }
     public void setDefenseLevel(String name){
         switch (name){
             case "shield": this.defenseLevel = 3;

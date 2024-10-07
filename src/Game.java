@@ -1,4 +1,5 @@
-import java.util.Scanner;
+import Board.Board;
+import Personnages.Personnage;
 
 public class Game {
     Menu menu;
@@ -19,13 +20,14 @@ public class Game {
                 personnage = getPlayerInput();
                 break;
             case 3:
-                menu.quitGame(personnage.name);
+                menu.quitGame(personnage.getName());
                 break;
             default:
-                menu.quitGame(personnage.name);
+                System.out.println("Invalid choice. Goodbye.");
+                menu.quitGame(personnage.getName());
         }
         ;
-        boolean start = menu.startGame(personnage.name);
+        boolean start = menu.startGame(personnage.getName());
         if (start) {
             playGame();
         }
@@ -58,11 +60,11 @@ public class Game {
         int diceThrow = board.throwDice();
         menu.showThrow(diceThrow);
 
-        System.out.println("pos before : " + board.playerPosition);
+        System.out.println("pos before : " + board.getPlayerPosition());
 
         board.movePlayer(diceThrow);
 
-        System.out.println("pos after : " + board.playerPosition);
-        return board.playerPosition > board.boardSize;
+        System.out.println("pos after : " + board.getPlayerPosition());
+        return board.getPlayerPosition() > board.getBoardSize();
     }
 }

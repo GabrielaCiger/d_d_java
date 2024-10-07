@@ -1,3 +1,7 @@
+package Board;
+
+import Personnages.Personnage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +15,14 @@ public class Board {
     public Board(Personnage personnage) {
         this.personnage = personnage;
         populateBoard();
+    }
+
+    public Integer getBoardSize() {
+        return boardSize;
+    }
+
+    public Integer getPlayerPosition() {
+        return playerPosition;
     }
 
     public int throwDice() {
