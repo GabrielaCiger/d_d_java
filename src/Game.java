@@ -1,3 +1,4 @@
+import Board.PlayerOutOfBoardException;
 import Board.Board;
 import Personnages.Personnage;
 import Personnages.Warrior;
@@ -12,11 +13,8 @@ public class Game {
         menu = new Menu();
     }
 
-    public void startMenu(){
+    public void startMenu() {
         boolean running = true;
-        boolean start;
-
-        /* * STARTING THE GAME - CHOICES FROM MENU */
         while (running) {
             int choiceMenu = menu.displayMenu();
             switch (choiceMenu) {
@@ -24,26 +22,20 @@ public class Game {
                     menu.intro();
                     personnage = getPlayerInput();
                     menu.outro(personnage);
-                    start = menu.validateContinue(personnage.getName());
-                    if (start || personnage != null) {
-                        playGame();
-                    }
+                    startGame(personnage, menu);
                     break;
-                case 2: /* ! Fast mode */
+                case 2: /* ? Fast mode */
                     personnage = getPlayerInput();
                     System.out.println(personnage.showPlayerStats());
-                    start = menu.validateContinue(personnage.getName());
-                    if (start || personnage != null) {
-                        playGame();
-                    }
+                    startGame(personnage, menu);
                     break;
                 default: /* * Quitting the game */
                     running = !menu.quitGame("");
                     break;
             }
-
         }
     }
+
     private Personnage getPlayerInput() {
         String name;
         String type;
@@ -88,28 +80,38 @@ public class Game {
         System.out.println("[YOU WON!]");
     }
 
+    public void startGame(Personnage personnage, Menu menu) {
+        boolean start = menu.validateContinue(personnage.getName());
+        if (start || personnage != null) {
+            playGame();
+        }
+    }
+
     public boolean gameRound(Board board) {
         int diceThrow = board.throwDice();
         menu.showThrow(diceThrow);
 
         int initialPosition = board.getPlayerPosition();
-        System.out.println("pos before : " + initialPosition);
-
         board.movePlayer(diceThrow);
-
         int nextPosition = board.getPlayerPosition();
-        System.out.println("pos after : " + nextPosition);
 
-        try {
-            if (board.getPlayerPosition() > board.getBoardSize()) {
-                throw new IllegalArgumentException("[There's nothing ahead. Return back.]");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            board.setPlayerPosition(initialPosition);
-            System.out.println("[You returned to the last known place (" + initialPosition + ")]");
-        }
+        menu.showPlayerMovement(initialPosition, nextPosition);
 
+        playerOutsideTheBoardException(board, initialPosition);
         return board.getPlayerPosition() == board.getBoardSize();
     }
+
+    public void playerOutsideTheBoardException(Board board, int initialPosition) {
+        try {
+            if (board.getPlayerPosition() > board.getBoardSize()) {
+                board.setPlayerPosition(initialPosition);
+                throw new PlayerOutOfBoardException("[Attention : You went too far. You must return to the last known place.");
+            }
+        } catch (PlayerOutOfBoardException e) {
+            System.out.println(e.getMessage());
+            System.out.println("[Info : You went back to the position " + initialPosition +".]");
+        }
+    }
+
+
 }

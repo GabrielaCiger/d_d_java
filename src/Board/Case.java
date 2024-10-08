@@ -1,6 +1,8 @@
 package Board;
 
+import Personnages.Personnage;
+
 public interface Case {
-    void doAction();
     String getValue();
+    void doAction(Personnage personnage);
 }

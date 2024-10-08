@@ -2,8 +2,8 @@ package Equipement;
 
 public class Spell extends EquipementOffensif {
     public Spell() {
-        this.name = "Spell";
-        this.attackLevel = 4;
+        this.name = "Simple spell";
+        this.attackLevel = 3;
     }
 
     public Spell(String newName, int newAttackLevel) {

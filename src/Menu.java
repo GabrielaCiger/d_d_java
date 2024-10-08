@@ -76,7 +76,6 @@ public class Menu {
         System.out.println("============================ ============================");
         System.out.println();
     }
-
     public void outro(Personnage personnage) {
         Scanner sc = new Scanner(System.in);
         String name = personnage.getName();
@@ -208,11 +207,12 @@ public class Menu {
 
     public Integer changePlayer() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("[What do you want to change?]");
+        System.out.println("[Do you want to proceed?]");
         System.out.println("1 < Change the name");
         System.out.println("2 < Change the type");
-        System.out.println("3 < Continue without changing.");
-        System.out.println("4 < Quit game.");
+        System.out.println("3 < Change both");
+        System.out.println("4 < Continue without changing.");
+        System.out.println("5 < Quit game.");
         return sc.nextInt();
     }
 
@@ -224,7 +224,11 @@ public class Menu {
             case 2:
                 type = getPlayerType();
                 break;
-            case 4:
+            case 3 :
+                name = getPlayerName();
+                type = getPlayerType();
+                break;
+            case 5:
                 quitGame(name);
                 break;
             default:
@@ -302,8 +306,14 @@ public class Menu {
         if (answer.equals("y") || answer.equals("ye") || answer.equals("yes")) {
             return true;
         }
-        System.out.println("[Player creation failed. Starting again...]");
         return false;
+    }
+
+    public void showPlayerMovement(int initPos, int finalPos) {
+        System.out.print("  ______       ______\n" +
+                " |      |     |      |\n" +
+                String.format(" |  %2d  |---->|  %2d  |\n", initPos, finalPos) +
+                " |______|     |______|\n");
     }
 
     public void changeName(Personnage personnage) {
@@ -322,7 +332,7 @@ public class Menu {
         try {
             personnage.setType(newType);
         } catch (Exception e) {
-            System.out.println("Error's occured while trying to change the name of the player.");
+            System.out.println("Error's occured while trying to change the type of the player.");
         }
     }
 }

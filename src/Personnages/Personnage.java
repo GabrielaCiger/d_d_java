@@ -1,4 +1,5 @@
 package Personnages;
+
 import Equipement.EquipementOffensif;
 import Equipement.EquipementDefensif;
 
@@ -20,6 +21,7 @@ public abstract class Personnage {
             this.name = name;
         }
     }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -48,6 +50,7 @@ public abstract class Personnage {
     public String getType() {
         return this.type;
     }
+
     public int getLife() {
         return this.life;
     }
@@ -68,13 +71,16 @@ public abstract class Personnage {
     public Personnage() {
         this("Player");
     }
+
     public Personnage(String name) {
         this(name, "warrior");
     }
+
     public Personnage(String name, String type) {
         setName(name);
         setType(type);
     }
+
     public String showPlayerStats() {
         return "\n" +
                 "============================\n" +
@@ -93,4 +99,21 @@ public abstract class Personnage {
                 "============================\n";
     }
 
+    public int countAttackPower() {
+        return attackStrength + equipmentOffensive.getAttackLevel();
+    }
+
+    public void doAttack(Personnage opponent) {
+        int damage = countAttackPower();
+        int opponentLife = opponent.getLife();
+        opponent.setLife(Math.max(0, opponentLife - damage));
+    }
+
+    public boolean death(String opponentName) {
+        if (this.life <= 0) {
+            System.out.println("[ " + name + " died at the hands of " + opponentName + ".]");
+            return true;
+        }
+        return false;
+    }
 }

@@ -36,17 +36,11 @@ public class Board {
     public void movePlayer(int diceValue) {
         playerPosition += diceValue;
         if (playerPosition >= boardSize) {
-            System.out.println("Game ends.");
             return;
         }
         Case currentCase = boardCases.get(playerPosition);
         System.out.println("Current case value: " + currentCase.getValue());
-        if (currentCase instanceof BonusCase) {
-            currentCase.doAction();
-            ((BonusCase) currentCase).getNewWeapon(personnage);
-        } else {
-            currentCase.doAction();
-        }
+        currentCase.doAction(personnage);
     }
 
     public int getRandomPosition() {
@@ -59,8 +53,9 @@ public class Board {
             boardCases.add(i, basicCase);
         }
         List<Integer> specialCases = new ArrayList<Integer>();
-        for (int j = 0; j < 5; j++) {
-            addSpecialCase(new BonusCase(personnage), specialCases);
+        for (int j = 0; j < 2; j++) {
+            addSpecialCase(new BonusCase(), specialCases);
+            addSpecialCase(new BonusDefenseCase(), specialCases);
         }
     }
 
