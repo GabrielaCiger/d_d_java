@@ -76,8 +76,7 @@ public class Game {
                 }
             }
         } while (!gameOver);
-        System.out.println("[You reached the Temple. What might it be guarding?]");
-        System.out.println("[YOU WON!]");
+        menu.gameEnd(personnage);
     }
 
     public void startGame(Personnage personnage, Menu menu) {

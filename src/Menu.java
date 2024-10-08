@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Menu {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String red = "\u001B[31m";
@@ -24,18 +25,18 @@ public class Menu {
         System.out.println("⠀⠀⠀⠀⠀      ⠀⢀⣴⣞⣽⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠠⣿⣿⡟⢻⣿⣿⣇⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣟⢦⡀⠀⠀⠀⠀⠀⠀");
         System.out.println("⠀⠀⠀⠀⠀     ⣠⣿⡾⣿⣿⣿⣿⣿⠿⣻⣿⣿⡀⠀⠀⠀⢻⣿⣷⡀⠻⣧⣿⠆⠀⠀⠀⠀⣿⣿⣿⡻⣿⣿⣿⣿⣿⠿⣽⣦⡀⠀⠀⠀⠀");
         System.out.println("⠀⠀⠀⠀      ⣼⠟⣩⣾⣿⣿⣿⢟⣵⣾⣿⣿⣿⣧⠀⠀⠀⠈⠿⣿⣿⣷⣈⠁⠀⠀⠀⠀⣰⣿⣿⣿⣿⣮⣟⢯⣿⣿⣷⣬⡻⣷⡄⠀⠀⠀");
-        System.out.println("       ⠀⢀⡜⣡⣾⣿⢿⣿⣿⣿" + ANSI_RESET + "  ============================" + red +"  ⢯⣿⣿⣷⣬⡻⣷⡄      ");
-        System.out.println("       ⡜⣡⣾⣿⢿⣿⣿⣿⣿" + ANSI_RESET +"   |     D&D (Java edition)   |" + red +"  ⠈⠻⣆⠙⣿⣜⠆⠀");
-        System.out.println("      ⡜⣡⣾⣿⢿⣿⣿⣿⣿" + ANSI_RESET +"    ============================" + red +"    ⠈⠙⢾⣆⠈⣷");
-        System.out.println("      ⢯⣿⠏⣠⠞⠋⣠⡿⠋" + ANSI_RESET +"    Type the number: " + red +"                   ⠃⢸");
-        System.out.println("       ⣸⠇⢠⣷⠞"+ ANSI_RESET+"             1 < New game (story)        " + red);
-        System.out.println("       ⣸⠇⢠⣷"+ ANSI_RESET+"                2 < Skip intro        "+ red);
-        System.out.println("       ⡟⠀⡿⠁"+ANSI_RESET+"                  3 < Exit  ");
+        System.out.println("       ⠀⢀⡜⣡⣾⣿⢿⣿⣿⣿" + ANSI_RESET + "  ============================" + red + "  ⢯⣿⣿⣷⣬⡻⣷⡄      ");
+        System.out.println("       ⡜⣡⣾⣿⢿⣿⣿⣿⣿" + ANSI_RESET + "   |     D&D (Java edition)   |" + red + "  ⠈⠻⣆⠙⣿⣜⠆⠀");
+        System.out.println("      ⡜⣡⣾⣿⢿⣿⣿⣿⣿" + ANSI_RESET + "    ============================" + red + "    ⠈⠙⢾⣆⠈⣷");
+        System.out.println("      ⢯⣿⠏⣠⠞⠋⣠⡿⠋" + ANSI_RESET + "    Type the number: " + red + "                   ⠃⢸");
+        System.out.println("       ⣸⠇⢠⣷⠞" + ANSI_RESET + "             1 < New game (story)        " + red);
+        System.out.println("       ⣸⠇⢠⣷" + ANSI_RESET + "                2 < Skip intro        " + red);
+        System.out.println("       ⡟⠀⡿⠁" + ANSI_RESET + "                  3 < Exit  ");
         System.out.println("                     ============================");
-        System.out.println(red +"                              ⠙⠻⠿⠿⠋⠀⢻⣿⡄");
+        System.out.println(red + "                              ⠙⠻⠿⠿⠋⠀⢻⣿⡄");
         System.out.println("                          ⠈⠻⣿  ⣴⣶⣤⡀ ⢸⣿⠇⠀");
         System.out.println("                            ⢸⡇⠀⠈⣿⣼⡟");
-        System.out.println("                            ⠈⠻⠶⣶⡟⠋"+ANSI_RESET);
+        System.out.println("                            ⠈⠻⠶⣶⡟⠋" + ANSI_RESET);
         return in.nextInt();
     }
 
@@ -76,6 +77,7 @@ public class Menu {
         System.out.println("============================ ============================");
         System.out.println();
     }
+
     public void outro(Personnage personnage) {
         Scanner sc = new Scanner(System.in);
         String name = personnage.getName();
@@ -224,7 +226,7 @@ public class Menu {
             case 2:
                 type = getPlayerType();
                 break;
-            case 3 :
+            case 3:
                 name = getPlayerName();
                 type = getPlayerType();
                 break;
@@ -335,4 +337,222 @@ public class Menu {
             System.out.println("Error's occured while trying to change the type of the player.");
         }
     }
+
+    public void gameEnd(Personnage personnage) {
+        System.out.println("[YOU WON! You reached the Temple. What might it be guarding?]\n\n");
+        System.out.println("   `,.      .   .        *   .    .      .  _    ..          .\n" +
+                "     \\,~-.         *           .    .       ))       *    .\n" +
+                "          \\ *          .   .   |    *  . .  ~    .      .  .  ,\n" +
+                " ,           `-.  .            :               *           ,-\n" +
+                "  -             `-.        *._/_\\_.       .       .   ,-\n" +
+                "  -                 `-_.,     |n|     .      .       ;\n" +
+                "    -                    \\ ._/_,_\\_.  .          . ,'         ,\n" +
+                "     -                    `-.|.n.|      .   ,-.__,'         -\n" +
+                "      -                   ._/_,_,_\\_.    ,-'              -\n" +
+                "      -                     |..n..|-`'-'                -\n" +
+                "       -                 ._/_,_,_,_\\_.                 -\n" +
+                "         -               ,-|...n...|                  -\n" +
+                "           -         ,-'._/_,_,_,_,_\\_.              -\n" +
+                "             -  ,-=-'     |....n....|              -\n" +
+                "              -;       ._/_,_,_,_,_,_\\_.         -\n" +
+                "             ,-          |.....n.....|          -\n" +
+                "           ,;         ._/_,_,_,_,_,_,_\\_.         -\n" +
+                "  `,  '.  `.  \".  `,  '.| n   ,-.   n |  \",  `.  `,  '.  `,  ',\n" +
+                ",.:;..;;..;;.,:;,.;:,o__|__o !.|.! o__|__o;,.:;.,;;,,:;,.:;,;;:\n" +
+                " ][  ][  ][  ][  ][  |_i_i_H_|_|_|_H_i_i_|  ][  ][  ][  ][  ][\n" +
+                "                     |     //=====\\\\     |\n" +
+                "                     |____//=======\\\\____|\n" +
+                "                         //=========\\\\ \n\n");
+        endStoryChoiceFirstSwitch(endStoryChoiceFirst(), personnage);
+    }
+
+    public Integer endStoryChoiceFirst() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑");
+        System.out.println("     What do you want to do?");
+        System.out.println("     -----------------------");
+        System.out.println("     1 < Enter the temple (end story).");
+        System.out.println("     2 < Show stats.");
+        System.out.println("     3 < Leave, you won anyway.");
+        System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
+        return sc.nextInt();
+    }
+
+    public void endStoryChoiceFirstSwitch(int choice, Personnage personnage) {
+        switch (choice) {
+            case 1:
+                firstStoryLine(personnage);
+                break;
+            case 2:
+                personnage.showPlayerStats();
+            default:
+                boolean quit = quitGame(personnage.getName());
+                if (!quit) {
+                    displayMenu();
+                }
+        }
+    }
+
+    boolean rememberedDuncan = false;
+    boolean visitedBirdcage = false;
+    boolean visitedGlassTable = false;
+
+    public void firstStoryLine(Personnage personnage) {
+        System.out.println("You walked the stairs leading you towards an entrance of the temple. \n"
+                + "You came so far. You remembered the old guy from the tavern. His name was... his name... was... \n");
+        Scanner sc = new Scanner(System.in);
+        String response = sc.nextLine().toLowerCase().trim();
+        if (response.contains("duncan")) {
+            wait(1500);
+            System.out.println(ANSI_GREEN + personnage.getName() + ANSI_RESET + ": Duncan...");
+            rememberedDuncan = true;
+        } else {
+            wait(1300);
+            System.out.println(ANSI_GREEN + personnage.getName() + ANSI_RESET + ": Was it " + response + "? If only I could remember his name...");
+        }
+        System.out.println("You walked various large and spacious halls of the temple, decorated with the statues of the past warriors. \n");
+        wait(1200);
+        System.out.println("            ______________\n" +
+                "           |    __  __    |\n" +
+                "           |   |  ||  |   |\n" +
+                "           |   |  ||  |   |\n" +
+                "           |   |__||__|   |\n" +
+                "           |    __  __  ()|\n" +
+                "           |   |  ||  |   |\n" +
+                "           |   |  ||  |   |\n" +
+                "           |   |  ||  |   |\n" +
+                "           |   |  ||  |   |\n" +
+                "           |   |__||__|   |\n" +
+                "           |______________|\n\n");
+        System.out.println("You slowly approach a mysterious door. It seems to be made from soul crystal, a precious but fragile material.");
+        System.out.println("┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑");
+        System.out.println("     What do you want to do?");
+        System.out.println("     -----------------------");
+        System.out.println("     1 < Enter the room behind the door.");
+        System.out.println("     2 < Leave temple");
+        System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
+        int enterRoom = sc.nextInt();
+        if (enterRoom == 2) {
+            quitGame(personnage.getName());
+        }
+        System.out.println("You entered the door.");
+        magicalRoomSwitch(magicalRoomChoose(), personnage);
+    }
+
+    public Integer magicalRoomChoose() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑");
+        System.out.println("   You see a glass table and a bird cage. What do you want to approach?");
+        System.out.println("   ---------------------------------------------------------");
+        System.out.println("                1 < Glass table");
+        System.out.println("                2 < Birdcage");
+        System.out.println("                3 < Leave the temple.");
+        System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
+        return sc.nextInt();
+    }
+
+    public void magicalRoomSwitch(int choice, Personnage personnage) {
+        switch (choice) {
+            case 1:
+//                glassTable(personnage);
+                break;
+            case 2:
+                birdCage(personnage);
+                break;
+            default:
+                boolean quit = quitGame(personnage.getName());
+                if (!quit) {
+                    displayMenu();
+                }
+        }
+    }
+
+    public void birdCage(Personnage personnage) {
+        Scanner sc = new Scanner(System.in);
+        String player = personnage.getName();
+        System.out.println("You approach a golden birdcage.");
+        if (!visitedBirdcage) {
+            wait(1300);
+            System.out.println("But it's not empty — inside sits a golden parrot.");
+            System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": You can talk to me.\n" +
+                    "[The parrot startled you. But he might know, where to find what you're looking for.]");
+            wait(1000);
+            System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": I don't bite. I only repeat what I was once taught. \n" +
+                    "[What do you want to ask?] \n" +
+                    "  1 > I'm looking for the meaning of life.\n" +
+                    "  2 > Why is there so much suffering in this world?\n" +
+                    "  3 > Leave the parrot.\n");
+            int choice = sc.nextInt();
+            if (choice == 1) {
+                visitedBirdcage = true;
+                System.out.println(ANSI_GREEN + player + ANSI_RESET + ":  I'm looking for the meaning of life.");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Interesting quest indeed. If you're asking it means, you haven't found it yet. \n");
+                wait(2000);
+                System.out.println(ANSI_GREEN + player + ANSI_RESET + ":  That's right...");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Many adventurers have searched, many have asked. Only a few found.\n");
+                wait(2000);
+                System.out.println(ANSI_GREEN + player + ANSI_RESET + ":  Can you help me? \n");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": I’m not seen, but I’m felt with every beat.");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": I’m the quiet companion that makes life complete.");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": I’m spoken in silence, I shine in the dark.");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": I live in the space between two hearts.\n");
+                wait(1000);
+                System.out.println(ANSI_GREEN + player + ANSI_RESET + ":  What does it mean?");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Some nourish it, while others take it for granted. But only at the end of our journey do we truly realize its value.");                System.out.println("[The parrot turned away and closed its eyes. He won't speak to you anymore.]");
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Might you find the answer soon before that, " + player + "...\n");
+                wait(1000);
+                System.out.println(ANSI_GREEN + player + ANSI_RESET + ":  How do you know my name?");
+                wait(1000);
+                System.out.println("[The parrot turned away and closed its eyes. He won't speak to you anymore.]");
+                magicalRoomChoose();
+            } else if (choice == 2) {
+                visitedBirdcage = true;
+                System.out.println(ANSI_GREEN + player + ANSI_RESET + ":  Why is there so much suffering in this world?");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Interesting question indeed. \n");
+                wait(1000);
+                System.out.println(ANSI_GREEN + player + ANSI_RESET + ":  Goblins are murdering, torturing, evil mages are fighting for power... Why?");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Only those with great evil inside have turned to goblins. A few of them have managed to return to their human nature.\n");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": But don't be fooled; even the mightiest warriors have succumbed. A broken heart, lack of gold, and bad companions can lead to their downfall...");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Every human is born with this evil curse. Are you strong enough to resist it?\n");
+                wait(1000);
+                System.out.println(ANSI_GREEN + player + ANSI_RESET + ": What about the evil mages? They are human too, yet still harbor evil within...");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Those who sow the seeds of malevolence shall reap a harvest of despair. \n");
+                wait(500);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Evil mages, chosen by the very people they deceive, wield their dark power with a twisted sense of purpose,");
+                wait(500);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": while many remain blind to their wickedness, swayed by the whispers of those they trust. ");
+                wait(500);
+                System.out.println(ANSI_GREEN + player + ANSI_RESET + ": What can you say about dragons and their evil doing?");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": From a warrior's eyes, dragons are fierce beasts, wreaking havoc and destruction upon their lands. \n");
+                wait(500);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": But from the dragon's perspective, they are merely survivalists, seeking nourishment in a world that encroaches upon their territory.");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": They do not recognize human borders; to them, it's just a matter of hunger. People are killing animals and destroying forests everyday...\n");
+                wait(1000);
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": What is a person in the eyes of a hungry mouse whose home has been destroyed to nourish the great beasts?\n");
+                wait(500);
+                System.out.println("[The parrot turned away and closed its eyes. He won't speak to you anymore.]");
+                magicalRoomChoose();
+            } else {
+                System.out.println("[You turned back and came back to the door.]");
+                magicalRoomChoose();
+            }
+        }
+        System.out.println("\n[Seems like the parrot won't talk to you anymore.]");
+        magicalRoomChoose();
+    }
 }
+
