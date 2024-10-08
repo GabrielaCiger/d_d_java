@@ -533,14 +533,24 @@ public class Menu {
                 System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Evil mages, chosen by the very people they deceive, wield their dark power with a twisted sense of purpose,");
                 wait(500);
                 System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": while many remain blind to their wickedness, swayed by the whispers of those they trust. ");
+                if (rememberedDuncan) {
+                    wait(500);
+                    System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Even your old friend Duncan... He was too blinded by the empty promises of the evil mage.");
+                    wait(500);
+                    System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": He forgot the power of his own choices, believing in empty lies and allowing his mind to be clouded by nonsense.");
+                    wait(500);
+                    System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": And here you are... Sent by him to find what he has lost at the bottom of the ale.");
+                    wait(500);
+                    System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Helping you was his last good deed before he himself turned into the very ones he sent you to kill.");
+                }
                 wait(500);
-                System.out.println(ANSI_GREEN + player + ANSI_RESET + ": What can you say about dragons and their evil doing?");
+                System.out.println(ANSI_GREEN + player + ANSI_RESET + ": What can you say about dragons and their evil doing?\n");
                 wait(1000);
-                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": From a warrior's eyes, dragons are fierce beasts, wreaking havoc and destruction upon their lands. \n");
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": From a warrior's eyes, dragons are fierce beasts, wreaking havoc and destruction upon their lands. ");
                 wait(500);
                 System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": But from the dragon's perspective, they are merely survivalists, seeking nourishment in a world that encroaches upon their territory.");
                 wait(1000);
-                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": They do not recognize human borders; to them, it's just a matter of hunger. People are killing animals and destroying forests everyday...\n");
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": They do not recognize human borders; to them, it's just a matter of hunger. People are killing animals and destroying forests everyday...");
                 wait(1000);
                 System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": What is a person in the eyes of a hungry mouse whose home has been destroyed to nourish the great beasts?\n");
                 wait(500);
