@@ -75,6 +75,9 @@ public class Game {
                     gameOver = true;
                 }
             }
+            if (personnage.death("an enemy")){
+                playerDiedChoices(menu.playerDied(personnage));
+            }
         } while (!gameOver);
         menu.gameEnd(personnage);
     }
@@ -112,5 +115,17 @@ public class Game {
         }
     }
 
-
+   public void playerDiedChoices(int choice) {
+        if (choice==3){
+            Personnage savedSettings;
+            if (personnage.getType().equals("wizard")) {
+                savedSettings = new Wizard(personnage.getName());
+            } else {
+                savedSettings = new Warrior(personnage.getName());
+            }
+            this.personnage = savedSettings;
+            startGame(personnage, menu);
+        }
+        startMenu();
+   }
 }

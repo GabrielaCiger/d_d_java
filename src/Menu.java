@@ -1,6 +1,7 @@
 import Personnages.Personnage;
 
 import java.util.Scanner;
+import java.util.spi.AbstractResourceBundleProvider;
 
 public class Menu {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -234,7 +235,7 @@ public class Menu {
                 quitGame(name);
                 break;
             default:
-                break;
+                return new String[]{name, type};
         }
         return new String[]{name, type};
     }
@@ -338,6 +339,45 @@ public class Menu {
         }
     }
 
+    public Integer playerDied(Personnage personnage){
+        System.out.println("                    ___          \n" +
+                "                   /   \\        \n" +
+                "              /\\ | . . \\       \n" +
+                "            ////\\|     ||       \n" +
+                "          ////   \\ ___//\\       \n" +
+                "         ///      \\\\      \\      \n" +
+                "        ///       |\\      |     \n" +
+                "       //         | \\  \\   \\    \n" +
+                "       /          |  \\  \\   \\   \n" +
+                "                  |   \\ /   /   \n" +
+                "                  |    \\/   /    \n" +
+                "                  |     \\/|     \n" +
+                "                  |      \\\\|     \n" +
+                "                  |       \\\\     \n" +
+                "                  |        |     \n" +
+                "                  |_________\\     \n");
+        System.out.println(red + "Reaper" + ANSI_RESET + ": So we finally meet, " + personnage.getName() + ".");
+        wait(1200);
+        System.out.println(red + "Reaper" + ANSI_RESET + ": I'm giving you a chance, just because you were so close.");
+        System.out.println(red + "Reaper" + ANSI_RESET + ": Choose wisely.");
+        wait(2000);
+        System.out.println("1 < Be reborn as a "+ personnage.getType() +".");
+        System.out.println("2 < Back to main menu.");
+        System.out.println("3 < Quit game.");
+        Scanner sc = new Scanner(System.in);
+        int choice = sc.nextInt();
+        if (choice == 3) {
+            System.out.println(red + "Reaper" + ANSI_RESET + ": Another quitter, goodbye, then.");
+            quitGame(personnage.getName());
+        } else if (choice == 2) {
+            System.out.println(red + "Reaper" + ANSI_RESET + ": See you in another life, then..\n\n\n\n");
+            wait(3000);
+            return 2;
+        }
+        System.out.println(red + "Reaper" + ANSI_RESET + ": See you once more later, then..\n\n\n\n");
+        return 3;
+    }
+
     public void gameEnd(Personnage personnage) {
         System.out.println("[YOU WON! You reached the Temple. What might it be guarding?]\n\n");
         System.out.println("   `,.      .   .        *   .    .      .  _    ..          .\n" +
@@ -384,7 +424,8 @@ public class Menu {
                 firstStoryLine(personnage);
                 break;
             case 2:
-                personnage.showPlayerStats();
+                System.out.println(personnage.showPlayerStats());
+                endStoryChoiceFirstSwitch(endStoryChoiceFirst(), personnage);
             default:
                 boolean quit = quitGame(personnage.getName());
                 if (!quit) {
@@ -505,7 +546,7 @@ public class Menu {
                 wait(1000);
                 System.out.println(ANSI_GREEN + player + ANSI_RESET + ":  What does it mean?");
                 wait(1000);
-                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Some nourish it, while others take it for granted. But only at the end of our journey do we truly realize its value.");                System.out.println("[The parrot turned away and closed its eyes. He won't speak to you anymore.]");
+                System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Some nourish it, while others take it for granted. But only at the end of our journey do we truly realize its value.");
                 System.out.println(ANSI_YELLOW + "Parrot" + ANSI_RESET + ": Might you find the answer soon before that, " + player + "...\n");
                 wait(1000);
                 System.out.println(ANSI_GREEN + player + ANSI_RESET + ":  How do you know my name?");

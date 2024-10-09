@@ -1,8 +1,15 @@
 package Board;
 
+import Equipement.Potion;
+import Equipement.Shield;
+import Equipement.Spell;
+import Equipement.Weapon;
+import Personnages.EvilMage;
+import Personnages.Goblin;
 import Personnages.Personnage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Board {
@@ -43,28 +50,32 @@ public class Board {
         currentCase.doAction(personnage);
     }
 
-    public int getRandomPosition() {
-        return (int)(Math.random() * boardSize + 1);
-    }
 
     public void populateBoard() {
         BasicCase basicCase = new BasicCase();
-        for (int i = 0; i < boardSize; i++) {
-            boardCases.add(i, basicCase);
+        addSpecialCases();
+        while (boardCases.size() < boardSize) {
+            boardCases.add(basicCase);
         }
-        List<Integer> specialCases = new ArrayList<Integer>();
-        for (int j = 0; j < 2; j++) {
-            addSpecialCase(new BonusCase(), specialCases);
-            addSpecialCase(new BonusDefenseCase(), specialCases);
-        }
+        Collections.shuffle(boardCases);
     }
 
-    public void addSpecialCase(Case specialCase, List<Integer> alreadyPopulated) {
-        int position;
-        do {
-            position = getRandomPosition();
-        } while (alreadyPopulated.contains(position) || position >= boardSize);
-        alreadyPopulated.add(position);
-        boardCases.set(position, specialCase);
+    public void addSpecialCases(){
+        boardCases.add(new Goblin());
+        boardCases.add(new Goblin());
+        boardCases.add(new Goblin());
+        boardCases.add(new Goblin());
+        boardCases.add(new EvilMage());
+        boardCases.add(new EvilMage());
+        boardCases.add(new Weapon("Iron sword", 5));
+        boardCases.add(new Weapon("Diamond sword", 7));
+        boardCases.add(new Weapon("Dragonslayer", 10));
+        boardCases.add(new Spell("Windblow", 4));
+        boardCases.add(new Spell("Earthblock", 5));
+        boardCases.add(new Spell("Lavaboom", 6));
+        boardCases.add(new Shield("Iron shield", 3));
+        boardCases.add(new Shield("Knight's armor", 5));
+        boardCases.add(new Potion("Telepathy potion", 3));
+        boardCases.add(new Potion("Invisibility potion", 4));
     }
 }
