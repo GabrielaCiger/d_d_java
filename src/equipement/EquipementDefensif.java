@@ -38,6 +38,7 @@ public abstract class EquipementDefensif implements Case {
         ChestMenu.encounterMessage();
         int getNew = chestMenu.applyChoice(ChestMenu.showChoicesUnopened(), this.name, this.type, this.defenseLevel);
         if(getNew == 1){
+            chestMenu.getNewEquipmentSuccess(this.type);
             getNewEquipement(personnage);
         }
     }

@@ -16,12 +16,12 @@ public class ConsoleUtils {
         }
     }
     public static void clearConsoleCommand() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        clearConsole();
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        clearConsole();
     }
 }
 

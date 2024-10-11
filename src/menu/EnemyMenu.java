@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import static displayutils.Colors.*;
 
-public class EnemyMenu {
+public class EnemyMenu extends Story {
 
     public EnemyMenu() {}
 
@@ -136,6 +136,44 @@ public class EnemyMenu {
         mage.setMessage("He gazes at you with an unsettling intensity, his eyes gleaming like cold steel in the dim light.");
         mage.setAttackMessage(ANSI_RED + "[Mage cast a spell. (-" + mage.countAttackPower() + " HP) ]" + ANSI_RESET);
     }
+
+    public static void nymph(Nymph nymph) {
+        String image = ANSI_BLUE + ".    .       . . ..   . .    .\n" +
+                " .  .      .. ..   -    .. .      \n" +
+                "     .  ..       @@@@@ ...   .    \n" +
+                ".         . .   C@@@@@@:    .   . \n" +
+                "..    .  .      . @@@@@@@@ ..  .  \n" +
+                "        .    . @@@@@: @@@@@=     .\n" +
+                "      .  .    @@@@@@@. @@@@.   .. \n" +
+                ". .  .@@   . @@@@@@@@@ .@@@    .  \n" +
+                " .     V@@@@@V %@@@@.   V       .\n" +
+                "..            . #@@@  .   . ..    \n" +
+                "    ..  .      @@@@@.    .. .   . \n" +
+                " . .          %@@@@@@ .      .... \n" +
+                "    .      . ..@@@@@@@@%    .     \n" +
+                " .         .  . #@@@@@@@@*@ . ..  \n" +
+                "    . . . . .. .    - -@@@@.   .  \n" +
+                "  ..             .     .@@@@@ .   \n" +
+                "   . .    .   @@  .  ..  @@@@ .  .\n" +
+                " .....  .    @@.       .@@@@=  .  \n" +
+                "  .   .. +@@@@@@ ..  ..-@@@- ..   \n" +
+                "       .:@T. . #@@@@@@@@@@        \n" +
+                "    ..  ..     . ..#%#-.     ..   \n" +
+                ".  ..  .     .   .      ..     ..  " + ANSI_RESET;
+        nymph.setImage(image);
+        nymph.setMessage("You sense an alluring presence ahead; a nymph stands gracefully, her smile hinting at both mischief and mercy.");
+    }
+
+    public static void nymphMessage(int nymphType, Personnage personnage) {
+        System.out.println(ANSI_BLUE + "Voice" + ANSI_RESET + ": Come closer, " + personnage.getName() + "... Lay your head near my waters..." );
+        System.out.println("[You followed the sweet voice to the shore. You laid down and felt asleep...]");
+        wait(2500);
+        if (nymphType==1) {
+            System.out.println(ANSI_GREEN + "[ While you were asleep, a mermaid healed your wounds. Your maxHP increased by 3. ]" + ANSI_RESET);
+        } else {
+            System.out.println(ANSI_RED + "[ While you were asleep, a siren took your equipment. Your equipment is lost. ]" + ANSI_RESET);
+        }
+    }
     public static int showChoices(Enemy enemy) {
         Scanner sc = new Scanner(System.in);
         System.out.println("`\n[What do you want to do?]\n");
@@ -148,6 +186,14 @@ public class EnemyMenu {
         if (Objects.equals(enemy.getName(), "dragon")){
             System.out.println("3 < Kneel before the beast.");
         }
+        return sc.nextInt();
+    }
+
+    public static int showChoicesNymph(Nymph nymph){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("`\n[What do you want to do?]\n");
+        System.out.println("1 < Approach the "+nymph.getName()+".");
+        System.out.println("2 < Turn away.");
         return sc.nextInt();
     }
 

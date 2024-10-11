@@ -9,13 +9,14 @@ import equipement.EquipementDefensif;
 
 public abstract class Personnage {
 
+    protected int maxLife;
     protected String name;
     protected String type;
     protected int life;
     protected int attackStrength;
     protected EquipementOffensif equipmentOffensive;
     protected EquipementDefensif equipmentDefensif;
-
+    protected boolean foundKey = true;
 
     /* ! CONSTRUCTORS: */
     public Personnage() {
@@ -31,6 +32,12 @@ public abstract class Personnage {
         setType(type);
     }
 
+    public Personnage(String name, String type, int maxLife) {
+        setName(name);
+        setType(type);
+        this.maxLife = maxLife;
+        setLife(maxLife);
+    }
 
     /* * SETTERS */
     public void setName(String name) {
@@ -61,8 +68,17 @@ public abstract class Personnage {
         this.equipmentOffensive = newWeapon;
     }
 
+    public void setMaxLife(int maxLife) {
+        this.maxLife = maxLife;
+    }
+
+    public void setFoundKey(boolean foundKey) {
+        this.foundKey = foundKey;
+    }
 
     /* ? GETTERS */
+    public int getMaxLife() { return maxLife; }
+
     public String getName() {
         return this.name;
     }
@@ -86,6 +102,8 @@ public abstract class Personnage {
     public EquipementDefensif getEquipmentDefensif() {
         return this.equipmentDefensif;
     }
+    public boolean isFoundKey() {return foundKey;
+    }
 
     /* ? METHODS */
     public String showPlayerStats() {
@@ -105,9 +123,11 @@ public abstract class Personnage {
                         "[No defense]") + "\n" +
                 "============================\n";
     }
+
     public int countAttackPower() {
         return this.attackStrength + this.equipmentOffensive.getAttackLevel();
     }
+
     public void doAttack(Personnage opponent) {
         int damage = countAttackPower();
         int opponentLife = opponent.getLife() + opponent.getEquipmentDefensif().getDefenseLevel();

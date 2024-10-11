@@ -1,4 +1,6 @@
 package board;
+import equipement.HealingItem;
+import equipement.Key;
 import equipement.defensif.Potion;
 import equipement.defensif.Shield;
 import equipement.offensif.Spell;
@@ -8,6 +10,9 @@ import menu.Menu;
 import personnages.enemies.Dragon;
 import personnages.enemies.EvilMage;
 import personnages.enemies.Goblin;
+import personnages.enemies.Nymph;
+import personnages.heroes.Warrior;
+
 import static displayutils.Colors.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,26 +61,70 @@ public class Board {
     }
 
     public void addSpecialCases(){
-        boardCases.add(new Goblin(menu));
-        boardCases.add(new Goblin(menu));
-        boardCases.add(new Goblin(menu));
-        boardCases.add(new Goblin(menu));
-        boardCases.add(new EvilMage(menu));
-        boardCases.add(new EvilMage(menu));
-        boardCases.add(new EvilMage(menu));
-        boardCases.add(new EvilMage(menu));
-        boardCases.add(new Dragon(menu));
-        boardCases.add(new Dragon(menu));
+        goblinMageCases(5);
+        dragonCases(4);
+        nymphCases(5);
+        warriorEquipmentCases();
+        wizardEquipmentCases();
+        healingItems();
+        boardCases.add(new Key());
+    }
+
+    public void goblinMageCases(int number) {
+        for (int i = 0; i < number; i++) {
+            boardCases.add(new Goblin(menu));
+            boardCases.add(new EvilMage(menu));
+        }
+    }
+
+    public void dragonCases(int number) {
+        for (int i = 0; i < number; i++) {
+            boardCases.add(new Dragon(menu));
+        }
+    }
+
+    public void nymphCases(int number) {
+        for (int i = 0; i < number; i++) {
+            boardCases.add(new Nymph(menu));
+        }
+    }
+
+    public void healingItems(){
+        boardCases.add(new HealingItem("Red apple", 1));
+        boardCases.add(new HealingItem("Green apple", 1));
+        boardCases.add(new HealingItem("Memberberry jam", 1));
+        boardCases.add(new HealingItem("Herbal tea", 2));
+        boardCases.add(new HealingItem("Elven bandage", 3));
+        boardCases.add(new HealingItem("Honeycomb Elixir", 4));
+        boardCases.add(new HealingItem("Bottle of live water", 5));
+    }
+
+    public void warriorEquipmentCases() {
+        boardCases.add(new Weapon("The Spoon of Doom", 1));
+        boardCases.add(new Weapon("Swordfish", 2));
         boardCases.add(new Weapon("Iron sword", 5));
         boardCases.add(new Weapon("Diamond sword", 7));
         boardCases.add(new Weapon("Dragonslayer", 10));
-        boardCases.add(new Spell("Windblow", 4));
-        boardCases.add(new Spell("Earthblock", 5));
-        boardCases.add(new Spell("Lavaboom", 6));
+
+        boardCases.add(new Shield("Adam's clothes", 1));
+        boardCases.add(new Shield("Silky pyjama", 2));
         boardCases.add(new Shield("Iron shield", 3));
         boardCases.add(new Shield("Knight's armor", 5));
+        boardCases.add(new Shield("Shield of the Archangel", 7));
+    }
+
+    public void wizardEquipmentCases(){
+        boardCases.add(new Spell("Glitter Bomb", 1));
+        boardCases.add(new Spell("Null Pointer Exception Spell", 2));
+        boardCases.add(new Spell("Windblow", 4));
+        boardCases.add(new Spell("Frostbite", 5));
+        boardCases.add(new Spell("Earthquake", 6));
+
+        boardCases.add(new Potion("Gin tonic", 2));
         boardCases.add(new Potion("Telepathy potion", 3));
-        boardCases.add(new Potion("Invisibility potion", 4));
+        boardCases.add(new Potion( "Invisibility potion", 4));
+        boardCases.add(new Potion("Celestial Brew", 5));
+        boardCases.add(new Potion("Elixir of Near-Immortality", 6));
     }
 
     public void doCaseAction(int playerPosition) {

@@ -13,6 +13,11 @@ public abstract class Enemy extends Personnage {
     protected String attackMessage;
     protected boolean isDead = false;
 
+    public Enemy(String name, String type) {
+        this.name = name;
+        this.type = type;
+    }
+
     public Enemy(String name, String type, EquipementOffensif equipmentOffensive, EquipementDefensif equipmentDefensif, int life, int attackStrength) {
         this.name = name;
         this.type = type;
@@ -53,7 +58,7 @@ public abstract class Enemy extends Personnage {
                 return;
             }
             fight(personnage);
-        } else if (choice == 3 && "dragon".equals(this.type)) {
+        } else if (choice == 3 && this.name.equals("dragon")) {
             enemyMenu.blessedByDragon(personnage);
         } else {
             enemyMenu.leaveEnemyMessage(this);
@@ -72,7 +77,7 @@ public abstract class Enemy extends Personnage {
         }
     }
     public void addStrengthLogic(Personnage personnage) {
-        switch (this.type){
+        switch (this.name){
             case "dragon": enemyMenu.addStrengthFromDragon(personnage); break;
             case "goblin" : enemyMenu.addStrengthWarrior(personnage, this); break;
             case "mage" : enemyMenu.addStrengthWizard(personnage, this); break;

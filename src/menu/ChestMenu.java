@@ -1,4 +1,5 @@
 package menu;
+import displayutils.StringUtils;
 import personnages.Personnage;
 
 import java.util.Scanner;
@@ -46,6 +47,13 @@ public class ChestMenu {
     public void leftChest(){
         System.out.println("[You left the chest unopened.]");
     }
+    public void getNewEquipmentSuccess(String type){
+        type = StringUtils.capitalizeFirstLetter(type);
+        System.out.println(ANSI_GREEN + "[ "+ type+" successfully equipped (see your stats).]" + ANSI_RESET);
+    }
+    public void getHealedSuccess(String name, Personnage personnage){
+        System.out.println(ANSI_GREEN + "[You used "+ name +". Your HP increased to "+ personnage.getLife() +".]" + ANSI_RESET);
+    }
 
     public int applyChoice(int choice, String name, String type, int power) {
         if (choice == 1) {
@@ -77,4 +85,15 @@ public class ChestMenu {
                         " =#*:                                     .+*@   \n"
         );
     }
+
+    public void foundKey(){
+        String key =
+                "     8 8 8 8                     ,ooo.\n" +
+                "     8a8 8a8                    oP   ?b\n" +
+                "    d888a888zzzzzzzzzzzzzzzzzzzz8     8b\n" +
+                "     `\"\"^\"\"'                ?o___oP'";
+        System.out.println(ANSI_MAGENTA + key + ANSI_RESET + "\n");
+        System.out.println("You obtained a " + ANSI_MAGENTA + "crystal key" + ANSI_RESET + ". You're not sure, if you'll ever need it.");
+    }
+
 }

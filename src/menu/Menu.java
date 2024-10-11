@@ -9,7 +9,18 @@ public class Menu {
     public Menu() {}
 
     public int displayMenu() {
-        Scanner in = new Scanner(System.in);
+        int choice = 0;
+        menu();
+        do {
+            choice = menuChoice(choice);
+        } while (choice < 1 || choice > 3);
+        return choice;
+    }
+
+    public void invalidChoice(){
+        System.out.println(ANSI_ORANGE + "[Please, select from options above.]" + ANSI_RESET);
+    }
+    public void menu() {
         System.out.println(ANSI_RED + "        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣤⡼⠀⢀⡀⣀⢱⡄⡀⠀⠀⠀⢲⣤⣤⣤⣤⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
         System.out.println("⠀⠀⠀⠀⠀      ⠀⠀⠀⠀⣠⣴⣾⣿⣿⣿⣿⣿⡿⠛⠋⠁⣤⣿⣿⣿⣧⣷⠀⠀⠘⠉⠛⢻⣷⣿⣽⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀");
         System.out.println("⠀⠀⠀⠀⠀      ⠀⢀⣴⣞⣽⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠠⣿⣿⡟⢻⣿⣿⣇⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣟⢦⡀⠀⠀⠀⠀⠀⠀");
@@ -27,7 +38,23 @@ public class Menu {
         System.out.println("                          ⠈⠻⣿  ⣴⣶⣤⡀ ⢸⣿⠇⠀");
         System.out.println("                            ⢸⡇⠀⠈⣿⣼⡟");
         System.out.println("                            ⠈⠻⠶⣶⡟⠋" + ANSI_RESET);
-        return in.nextInt();
+    }
+    public int menuChoice(int choice) {
+        Scanner in = new Scanner(System.in);
+        String input = in.nextLine();
+        if (input.isEmpty()) {
+            invalidChoice();
+        } else {
+            try {
+                choice = Integer.parseInt(input);
+                if (choice < 1 || choice > 3) {
+                    invalidChoice();
+                }
+            } catch (NumberFormatException e) {
+                invalidChoice();
+            }
+        }
+        return choice;
     }
 
     public void showClasses() {

@@ -82,7 +82,7 @@ public class Game {
     }
 
     public boolean playerAction(Board board) {
-        int diceThrow = board.throwDice();
+        int diceThrow = board.throwDice( );
         int initialPosition = board.getPlayerPosition();
 
         menu.showThrow(diceThrow);
