@@ -1,6 +1,6 @@
-package Board;
+package board;
 
-import Personnages.Personnage;
+import personnages.Personnage;
 
 public interface Case {
     String getValue();

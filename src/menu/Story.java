@@ -1,16 +1,16 @@
-import Personnages.Personnage;
-
+package menu;
+import displayutils.StringUtils;
+import personnages.Personnage;
 import java.util.Scanner;
-import java.util.spi.AbstractResourceBundleProvider;
+import static displayutils.Colors.*;
+import static displayutils.ConsoleUtils.clearConsoleCommand;
 
-public class Menu {
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String red = "\u001B[31m";
+public class Story extends Menu {
+    boolean rememberedDuncan = false;
+    boolean visitedBirdcage = false;
+    boolean visitedGlassTable = false;
 
+    public Story() {}
     public static void wait(int ms) {
         try {
             Thread.sleep(ms);
@@ -18,29 +18,6 @@ public class Menu {
             Thread.currentThread().interrupt();
         }
     }
-
-    public Integer displayMenu() {
-        Scanner in = new Scanner(System.in);
-        System.out.println(red + "        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣤⡼⠀⢀⡀⣀⢱⡄⡀⠀⠀⠀⢲⣤⣤⣤⣤⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀      ⠀⠀⠀⠀⣠⣴⣾⣿⣿⣿⣿⣿⡿⠛⠋⠁⣤⣿⣿⣿⣧⣷⠀⠀⠘⠉⠛⢻⣷⣿⣽⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀      ⠀⢀⣴⣞⣽⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠠⣿⣿⡟⢻⣿⣿⣇⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣟⢦⡀⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀     ⣠⣿⡾⣿⣿⣿⣿⣿⠿⣻⣿⣿⡀⠀⠀⠀⢻⣿⣷⡀⠻⣧⣿⠆⠀⠀⠀⠀⣿⣿⣿⡻⣿⣿⣿⣿⣿⠿⣽⣦⡀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀      ⣼⠟⣩⣾⣿⣿⣿⢟⣵⣾⣿⣿⣿⣧⠀⠀⠀⠈⠿⣿⣿⣷⣈⠁⠀⠀⠀⠀⣰⣿⣿⣿⣿⣮⣟⢯⣿⣿⣷⣬⡻⣷⡄⠀⠀⠀");
-        System.out.println("       ⠀⢀⡜⣡⣾⣿⢿⣿⣿⣿" + ANSI_RESET + "  ============================" + red + "  ⢯⣿⣿⣷⣬⡻⣷⡄      ");
-        System.out.println("       ⡜⣡⣾⣿⢿⣿⣿⣿⣿" + ANSI_RESET + "   |     D&D (Java edition)   |" + red + "  ⠈⠻⣆⠙⣿⣜⠆⠀");
-        System.out.println("      ⡜⣡⣾⣿⢿⣿⣿⣿⣿" + ANSI_RESET + "    ============================" + red + "    ⠈⠙⢾⣆⠈⣷");
-        System.out.println("      ⢯⣿⠏⣠⠞⠋⣠⡿⠋" + ANSI_RESET + "    Type the number: " + red + "                   ⠃⢸");
-        System.out.println("       ⣸⠇⢠⣷⠞" + ANSI_RESET + "             1 < New game (story)        " + red);
-        System.out.println("       ⣸⠇⢠⣷" + ANSI_RESET + "                2 < Skip intro        " + red);
-        System.out.println("       ⡟⠀⡿⠁" + ANSI_RESET + "                  3 < Exit  ");
-        System.out.println("                     ============================");
-        System.out.println(red + "                              ⠙⠻⠿⠿⠋⠀⢻⣿⡄");
-        System.out.println("                          ⠈⠻⣿  ⣴⣶⣤⡀ ⢸⣿⠇⠀");
-        System.out.println("                            ⢸⡇⠀⠈⣿⣼⡟");
-        System.out.println("                            ⠈⠻⠶⣶⡟⠋" + ANSI_RESET);
-        return in.nextInt();
-    }
-
     public void intro() {
         System.out.println("┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑");
         System.out.println("⠀⢀⣀⣀⣀⠀⣶⣶⠀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⠀⣶⣶⠀⣀⣀⣀⡀⠀");
@@ -65,20 +42,6 @@ public class Menu {
         System.out.println("He seems sad, maybe hopeless? As you sit, he looks at you with an uninterested glaze.");
         wait(1500);
     }
-
-    public void showClasses() {
-        System.out.println("============================ ============================");
-        System.out.println("|    Class 1: WARRIOR ➶   | |     Class 2: WIZARD ✧˖°  |");
-        System.out.println("============================ ============================");
-        System.out.println("| HP: 10                   | | HP: 6                    |");
-        System.out.println("| Attack: 10               | | Attack: 15               |");
-        System.out.println("|                          | |                          |");
-        System.out.println("| Can hold only battle     | | Can hold only magical    |");
-        System.out.println("| weapons.                 | | weapons.                 |");
-        System.out.println("============================ ============================");
-        System.out.println();
-    }
-
     public void outro(Personnage personnage) {
         Scanner sc = new Scanner(System.in);
         String name = personnage.getName();
@@ -112,7 +75,7 @@ public class Menu {
             System.out.println(ANSI_GREEN + name + ANSI_RESET + ": What temple? Why is it so important?");
             wait(4000);
             System.out.println(ANSI_BLUE + "Duncan" + ANSI_RESET + ": The Temple protects the meaning of life. You must find it.");
-            System.out.println("[His hands start to shake. He looks nervous and scared.]");
+            System.out.println("[His hands start to shake. He looks nervous and scaANSI_RED.]");
         }
         wait(2500);
         System.out.println(ANSI_BLUE + "Duncan" + ANSI_RESET + ": Go and find... the Temple. You have to...");
@@ -130,7 +93,7 @@ public class Menu {
         System.out.println(" \\()/   ()  /          ");
         System.out.println("  \\/_____()/           ");
         System.out.println();
-        System.out.println("   [ You obtained : " + ANSI_PURPLE + "Magic dice" + ANSI_RESET + ". ]   ");
+        System.out.println("   [ You obtained : " + ANSI_MAGENTA + "Magic dice" + ANSI_RESET + ". ]   ");
         wait(3000);
         System.out.println(ANSI_BLUE + "Duncan" + ANSI_RESET + ": It's all I can do. Now go. GET OUT OF HERE!");
         System.out.println(ANSI_GREEN + name + ANSI_RESET + ": Thank you, Duncan.");
@@ -139,210 +102,15 @@ public class Menu {
         System.out.println();
         System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
     }
-
-    public boolean quitGame(String name) {
-        String goodbyeMessage = "Goodbye";
-        if (!name.isEmpty()) {
-            goodbyeMessage += " " + name;
-        }
-        goodbyeMessage += " !";
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Are you sure, that you want to quit? (y/n)");
-        String response = sc.nextLine().toLowerCase().trim();
-        if (response.contains("y")) {
-            System.out.println(goodbyeMessage);
-            System.exit(0);
-        } else {
-            return false;
-        }
-        return false;
-    }
-
-    public String getPlayerName() {
-        /* ! SET NAME*/
-        Scanner sc = new Scanner(System.in);
-        String name;
-        System.out.println(ANSI_BLUE + "Unknown man" + ANSI_RESET + ": Hello there, foreign traveler. What's your name?");
-        do {
-            name = sc.nextLine().trim();
-            if (name.isEmpty()) {
-                System.out.println("[Input can't be empty. Choose a name.]");
-            }
-        } while (name.isEmpty());
-        System.out.println(ANSI_GREEN + name + ANSI_RESET + ": Hello, my name is " + name + ". ");
-        System.out.println(ANSI_BLUE + "Unknown man" + ANSI_RESET + ": Nice to meet you, " + name + ".");
-        return name;
-    }
-
-    public String getPlayerType() {
-        Scanner sc = new Scanner(System.in);
-        String type;
-
-        while (true) {
-            System.out.println();
-            System.out.println(ANSI_BLUE + "Unknown man" + ANSI_RESET + ": What are you doing here?");
-            System.out.println("[Choose your class. Type " + ANSI_GREEN + "wizard" + ANSI_RESET + " or " + ANSI_GREEN + "warrior" + ANSI_RESET + ". Type " + ANSI_BLUE + "help" + ANSI_RESET + " to see classes info.]");
-            String answer = sc.nextLine().trim().toLowerCase();
-
-            if (answer.equals("help")) {
-                showClasses();
-            } else if (answer.equals("wizard") || answer.equals("warrior")) {
-                type = answer;
-                break;
-            } else {
-                System.out.println("Invalid choice. Defaulting to " + ANSI_GREEN + "warrior" + ANSI_RESET + ".");
-                type = "warrior";
-                break;
-            }
-        }
-        return type;
-    }
-
-    public boolean validateContinue(String name) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Are you sure, " + name + ", that you want to continue? (y/n)");
-        String response = sc.nextLine().toLowerCase().trim();
-        if (response.contains("n")) {
-            quitGame(name);
-        }
-        return true;
-    }
-
-    public Integer changePlayer() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("[Do you want to proceed?]");
-        System.out.println("1 < Change the name");
-        System.out.println("2 < Change the type");
-        System.out.println("3 < Change both");
-        System.out.println("4 < Continue without changing.");
-        System.out.println("5 < Quit game.");
-        return sc.nextInt();
-    }
-
-    public String[] changePlayerSettings(int choice, String name, String type) {
-        switch (choice) {
-            case 1:
-                name = getPlayerName();
-                break;
-            case 2:
-                type = getPlayerType();
-                break;
-            case 3:
-                name = getPlayerName();
-                type = getPlayerType();
-                break;
-            case 5:
-                quitGame(name);
-                break;
-            default:
-                return new String[]{name, type};
-        }
-        return new String[]{name, type};
-    }
-
-    public Integer newRound() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑");
-        System.out.println("     What do you want to do?");
-        System.out.println("     -----------------------");
-        System.out.println("        1 < Throw dice.");
-        System.out.println("        2 < Show stats.");
-        System.out.println("        3 < Quit adventure.");
-        System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
-        return sc.nextInt();
-    }
-
-    public void showThrow(int diceThrow) {
-        System.out.println("┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑");
-        System.out.println("You throw the magic dice. You see the dice rolling, when suddenly... it stops...");
-        switch (diceThrow) {
-            case 1:
-                System.out.println("    +-------+ ");
-                System.out.println("    |       | ");
-                System.out.println("    |   O   | ");
-                System.out.println("    |       | ");
-                System.out.println("    +-------+ ");
-                break;
-            case 2:
-                System.out.println("    +-------+ ");
-                System.out.println("    | O     | ");
-                System.out.println("    |       | ");
-                System.out.println("    |     O | ");
-                System.out.println("    +-------+ ");
-                break;
-            case 3:
-                System.out.println("    +-------+ ");
-                System.out.println("    | O     | ");
-                System.out.println("    |   O   | ");
-                System.out.println("    |     O | ");
-                System.out.println("    +-------+ ");
-                break;
-            case 4:
-                System.out.println("    +-------+ ");
-                System.out.println("    | O   O | ");
-                System.out.println("    |       | ");
-                System.out.println("    | O   O | ");
-                System.out.println("    +-------+ ");
-                break;
-            case 5:
-                System.out.println("    +-------+ ");
-                System.out.println("    | O   O | ");
-                System.out.println("    |   O   | ");
-                System.out.println("    | O   O | ");
-                System.out.println("    +-------+ ");
-                break;
-            case 6:
-                System.out.println("    +-------+ ");
-                System.out.println("    | O   O | ");
-                System.out.println("    | 0   0 | ");
-                System.out.println("    | O   O | ");
-                System.out.println("    +-------+ ");
-                break;
-        }
-        System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
-    }
-
-    public boolean validateChoices() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("[Do you confirm the changes? (y/n)]");
-        String answer = sc.nextLine().trim().toLowerCase();
-        if (answer.equals("y") || answer.equals("ye") || answer.equals("yes")) {
-            return true;
-        }
-        return false;
-    }
-
-    public void showPlayerMovement(int initPos, int finalPos) {
-        System.out.print("  ______       ______\n" +
-                " |      |     |      |\n" +
-                String.format(" |  %2d  |---->|  %2d  |\n", initPos, finalPos) +
-                " |______|     |______|\n");
-    }
-
-    public void changeName(Personnage personnage) {
-        System.out.println("[Enter new name.]");
-        Scanner sc = new Scanner(System.in);
-        String newName = sc.nextLine();
-        try {
-            personnage.setName(newName);
-        } catch (Exception e) {
-            System.out.println("Error's occured while trying to change the name of the player.");
-        }
-    }
-
-    public void changeType(Personnage personnage) {
-        String newType = getPlayerType();
-        try {
-            personnage.setType(newType);
-        } catch (Exception e) {
-            System.out.println("Error's occured while trying to change the type of the player.");
-        }
-    }
-
-    public Integer playerDied(Personnage personnage){
+    public int playerDied(Personnage personnage){
+        System.out.println(ANSI_RED + "[You were killed by your opponent.]");
+        clearConsoleCommand();
+        wait(1000);
+        System.out.println(ANSI_RED + "[As you lie in darkness, a chilling breeze sweeps over you, whispering ancient secrets. \n From the shadows, a sinister and ethereal presence draws near, its form shifting like smoke, invoking dread in the depths of your soul...]");
+        wait(3500);
         System.out.println("                    ___          \n" +
                 "                   /   \\        \n" +
-                "              /\\ | . . \\       \n" +
+                "              /\\ |"+ANSI_RED+" . ."+ANSI_RESET+" \\       \n" +
                 "            ////\\|     ||       \n" +
                 "          ////   \\ ___//\\       \n" +
                 "         ///      \\\\      \\      \n" +
@@ -356,29 +124,31 @@ public class Menu {
                 "                  |       \\\\     \n" +
                 "                  |        |     \n" +
                 "                  |_________\\     \n");
-        System.out.println(red + "Reaper" + ANSI_RESET + ": So we finally meet, " + personnage.getName() + ".");
+        System.out.println(ANSI_RED + "Reaper" + ANSI_RESET + ": So we finally meet, " + personnage.getName() + ".");
         wait(1200);
-        System.out.println(red + "Reaper" + ANSI_RESET + ": I'm giving you a chance, just because you were so close.");
-        System.out.println(red + "Reaper" + ANSI_RESET + ": Choose wisely.");
+        System.out.println(ANSI_RED + "Reaper" + ANSI_RESET + ": I'm giving you a chance, just because you were so close.");
+        System.out.println(ANSI_RED + "Reaper" + ANSI_RESET + ": Choose wisely.");
         wait(2000);
         System.out.println("1 < Be reborn as a "+ personnage.getType() +".");
         System.out.println("2 < Back to main menu.");
         System.out.println("3 < Quit game.");
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
+        clearConsoleCommand();
         if (choice == 3) {
-            System.out.println(red + "Reaper" + ANSI_RESET + ": Another quitter, goodbye, then.");
+            System.out.println(ANSI_RED + "Reaper" + ANSI_RESET + ": Another quitter, goodbye, then.");
             quitGame(personnage.getName());
         } else if (choice == 2) {
-            System.out.println(red + "Reaper" + ANSI_RESET + ": See you in another life, then..\n\n\n\n");
+            System.out.println(ANSI_RED + "Reaper" + ANSI_RESET + ": See you in another life, then..\n\n\n\n");
             wait(3000);
             return 2;
         }
-        System.out.println(red + "Reaper" + ANSI_RESET + ": See you once more later, then..\n\n\n\n");
+        System.out.println(ANSI_RED + "Reaper" + ANSI_RESET + ": See you once more later, then..\n\n\n\n");
         return 3;
     }
 
     public void gameEnd(Personnage personnage) {
+        clearConsoleCommand();
         System.out.println("[YOU WON! You reached the Temple. What might it be guarding?]\n\n");
         System.out.println("   `,.      .   .        *   .    .      .  _    ..          .\n" +
                 "     \\,~-.         *           .    .       ))       *    .\n" +
@@ -417,7 +187,6 @@ public class Menu {
         System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
         return sc.nextInt();
     }
-
     public void endStoryChoiceFirstSwitch(int choice, Personnage personnage) {
         switch (choice) {
             case 1:
@@ -433,12 +202,8 @@ public class Menu {
                 }
         }
     }
-
-    boolean rememberedDuncan = false;
-    boolean visitedBirdcage = false;
-    boolean visitedGlassTable = false;
-
     public void firstStoryLine(Personnage personnage) {
+        clearConsoleCommand();
         System.out.println("You walked the stairs leading you towards an entrance of the temple. \n"
                 + "You came so far. You remembered the old guy from the tavern. His name was... his name... was... \n");
         Scanner sc = new Scanner(System.in);
@@ -449,6 +214,7 @@ public class Menu {
             rememberedDuncan = true;
         } else {
             wait(1300);
+            StringUtils.capitalizeFirstLetter(response);
             System.out.println(ANSI_GREEN + personnage.getName() + ANSI_RESET + ": Was it " + response + "? If only I could remember his name...");
         }
         System.out.println("You walked various large and spacious halls of the temple, decorated with the statues of the past warriors. \n");
@@ -473,6 +239,7 @@ public class Menu {
         System.out.println("     2 < Leave temple");
         System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
         int enterRoom = sc.nextInt();
+        clearConsoleCommand();
         if (enterRoom == 2) {
             quitGame(personnage.getName());
         }
@@ -480,7 +247,7 @@ public class Menu {
         magicalRoomSwitch(magicalRoomChoose(), personnage);
     }
 
-    public Integer magicalRoomChoose() {
+    public int magicalRoomChoose() {
         Scanner sc = new Scanner(System.in);
         System.out.println("┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑");
         System.out.println("   You see a glass table and a bird cage. What do you want to approach?");
@@ -491,11 +258,9 @@ public class Menu {
         System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
         return sc.nextInt();
     }
-
     public void magicalRoomSwitch(int choice, Personnage personnage) {
         switch (choice) {
             case 1:
-//                glassTable(personnage);
                 break;
             case 2:
                 birdCage(personnage);
@@ -507,10 +272,10 @@ public class Menu {
                 }
         }
     }
-
     public void birdCage(Personnage personnage) {
         Scanner sc = new Scanner(System.in);
         String player = personnage.getName();
+        clearConsoleCommand();
         System.out.println("You approach a golden birdcage.");
         if (!visitedBirdcage) {
             wait(1300);
@@ -524,6 +289,7 @@ public class Menu {
                     "  2 > Why is there so much suffering in this world?\n" +
                     "  3 > Leave the parrot.\n");
             int choice = sc.nextInt();
+            clearConsoleCommand();
             if (choice == 1) {
                 visitedBirdcage = true;
                 System.out.println(ANSI_GREEN + player + ANSI_RESET + ":  I'm looking for the meaning of life.");
@@ -606,4 +372,3 @@ public class Menu {
         magicalRoomChoose();
     }
 }
-

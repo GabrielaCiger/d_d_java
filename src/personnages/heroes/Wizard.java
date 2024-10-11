@@ -1,6 +1,7 @@
-package Personnages;
-import Equipement.Potion;
-import Equipement.Spell;
+package personnages.heroes;
+import equipement.defensif.Potion;
+import equipement.offensif.Spell;
+import personnages.Personnage;
 
 public class Wizard extends Personnage {
     public Wizard(String name) {

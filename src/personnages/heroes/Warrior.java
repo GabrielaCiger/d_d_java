@@ -1,6 +1,7 @@
-package Personnages;
-import Equipement.Shield;
-import Equipement.Weapon;
+package personnages.heroes;
+import equipement.defensif.Shield;
+import equipement.offensif.Weapon;
+import personnages.Personnage;
 
 public class Warrior extends Personnage {
 

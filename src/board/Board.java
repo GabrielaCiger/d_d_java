@@ -1,34 +1,36 @@
-package Board;
-
-import Equipement.Potion;
-import Equipement.Shield;
-import Equipement.Spell;
-import Equipement.Weapon;
-import Personnages.EvilMage;
-import Personnages.Goblin;
-import Personnages.Personnage;
-
+package board;
+import equipement.defensif.Potion;
+import equipement.defensif.Shield;
+import equipement.offensif.Spell;
+import equipement.offensif.Weapon;
+import personnages.*;
+import menu.Menu;
+import personnages.enemies.Dragon;
+import personnages.enemies.EvilMage;
+import personnages.enemies.Goblin;
+import static displayutils.Colors.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class Board {
     int boardSize = 64;
+    Menu menu;
     Personnage personnage;
     int playerPosition = 1;
 
     ArrayList<Case> boardCases = new ArrayList<>();
 
-    public Board(Personnage personnage) {
+    public Board(Personnage personnage, Menu menu) {
         this.personnage = personnage;
+        this.menu = menu;
         populateBoard();
     }
 
-    public Integer getBoardSize() {
+    public int getBoardSize() {
         return this.boardSize;
     }
 
-    public Integer getPlayerPosition() {
+    public int getPlayerPosition() {
         return this.playerPosition;
     }
 
@@ -42,17 +44,10 @@ public class Board {
 
     public void movePlayer(int diceValue) {
         playerPosition += diceValue;
-        if (playerPosition >= boardSize) {
-            return;
-        }
-        Case currentCase = boardCases.get(playerPosition);
-        System.out.println("Current case value: " + currentCase.getValue());
-        currentCase.doAction(personnage);
     }
 
-
     public void populateBoard() {
-        BasicCase basicCase = new BasicCase();
+        BasicCase basicCase = new BasicCase(menu);
         addSpecialCases();
         while (boardCases.size() < boardSize) {
             boardCases.add(basicCase);
@@ -61,12 +56,16 @@ public class Board {
     }
 
     public void addSpecialCases(){
-        boardCases.add(new Goblin());
-        boardCases.add(new Goblin());
-        boardCases.add(new Goblin());
-        boardCases.add(new Goblin());
-        boardCases.add(new EvilMage());
-        boardCases.add(new EvilMage());
+        boardCases.add(new Goblin(menu));
+        boardCases.add(new Goblin(menu));
+        boardCases.add(new Goblin(menu));
+        boardCases.add(new Goblin(menu));
+        boardCases.add(new EvilMage(menu));
+        boardCases.add(new EvilMage(menu));
+        boardCases.add(new EvilMage(menu));
+        boardCases.add(new EvilMage(menu));
+        boardCases.add(new Dragon(menu));
+        boardCases.add(new Dragon(menu));
         boardCases.add(new Weapon("Iron sword", 5));
         boardCases.add(new Weapon("Diamond sword", 7));
         boardCases.add(new Weapon("Dragonslayer", 10));
@@ -77,5 +76,14 @@ public class Board {
         boardCases.add(new Shield("Knight's armor", 5));
         boardCases.add(new Potion("Telepathy potion", 3));
         boardCases.add(new Potion("Invisibility potion", 4));
+    }
+
+    public void doCaseAction(int playerPosition) {
+        if (playerPosition >= boardSize) {
+            return;
+        }
+        Case currentCase = boardCases.get(playerPosition);
+        System.out.println("Current case value: " + ANSI_YELLOW + currentCase.getValue() + ANSI_RESET);
+        currentCase.doAction(personnage);
     }
 }

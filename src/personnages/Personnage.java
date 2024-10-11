@@ -1,18 +1,36 @@
-package Personnages;
+package personnages;
 
-import Equipement.EquipementOffensif;
-import Equipement.EquipementDefensif;
+import menu.Menu;
+
+import static displayutils.Colors.*;
+
+import equipement.EquipementOffensif;
+import equipement.EquipementDefensif;
 
 public abstract class Personnage {
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_RED = "\u001B[31m";
-    protected String type;
+
     protected String name;
+    protected String type;
     protected int life;
     protected int attackStrength;
     protected EquipementOffensif equipmentOffensive;
     protected EquipementDefensif equipmentDefensif;
+
+
+    /* ! CONSTRUCTORS: */
+    public Personnage() {
+        this("Player");
+    }
+
+    public Personnage(String name) {
+        this(name, "warrior");
+    }
+
+    public Personnage(String name, String type) {
+        setName(name);
+        setType(type);
+    }
+
 
     /* * SETTERS */
     public void setName(String name) {
@@ -43,6 +61,7 @@ public abstract class Personnage {
         this.equipmentOffensive = newWeapon;
     }
 
+
     /* ? GETTERS */
     public String getName() {
         return this.name;
@@ -68,20 +87,7 @@ public abstract class Personnage {
         return this.equipmentDefensif;
     }
 
-    /* ! CONSTRUCTORS: */
-    public Personnage() {
-        this("Player");
-    }
-
-    public Personnage(String name) {
-        this(name, "warrior");
-    }
-
-    public Personnage(String name, String type) {
-        setName(name);
-        setType(type);
-    }
-
+    /* ? METHODS */
     public String showPlayerStats() {
         return "\n" +
                 "============================\n" +
@@ -99,22 +105,12 @@ public abstract class Personnage {
                         "[No defense]") + "\n" +
                 "============================\n";
     }
-
     public int countAttackPower() {
-        return attackStrength + equipmentOffensive.getAttackLevel();
+        return this.attackStrength + this.equipmentOffensive.getAttackLevel();
     }
-
     public void doAttack(Personnage opponent) {
         int damage = countAttackPower();
-        int opponentLife = opponent.getLife();
+        int opponentLife = opponent.getLife() + opponent.getEquipmentDefensif().getDefenseLevel();
         opponent.setLife(Math.max(0, opponentLife - damage));
-    }
-
-    public boolean death(String opponentName) {
-        if (this.life <= 0) {
-            System.out.println("[ " + name + " died at the hands of " + opponentName + ".]");
-            return true;
-        }
-        return false;
     }
 }
