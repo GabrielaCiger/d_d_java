@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class Nymph extends Enemy implements Case {
 
-    public Nymph(Menu menu) {
+    public Nymph() {
         super("nymph", "enemy");
     }
 

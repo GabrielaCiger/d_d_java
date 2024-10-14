@@ -2,25 +2,21 @@ package personnages.enemies;
 import equipement.EquipementDefensif;
 import equipement.EquipementOffensif;
 import menu.EnemyMenu;
-import menu.Menu;
 import personnages.Personnage;
 
 public abstract class Enemy extends Personnage {
-    protected Menu menu;
     protected EnemyMenu enemyMenu = new EnemyMenu();
     protected String image;
-    protected String message;
+    protected String message; /* encounter message */
     protected String attackMessage;
     protected boolean isDead = false;
 
     public Enemy(String name, String type) {
-        this.name = name;
-        this.type = type;
+        super(name, type);
     }
 
     public Enemy(String name, String type, EquipementOffensif equipmentOffensive, EquipementDefensif equipmentDefensif, int life, int attackStrength) {
-        this.name = name;
-        this.type = type;
+        super(name, type);
         this.equipmentOffensive = equipmentOffensive;
         this.equipmentDefensif = equipmentDefensif;
         this.life = life;

@@ -8,9 +8,8 @@ import personnages.Personnage;
 
 public class EvilMage extends Enemy implements Case {
 
-    public EvilMage(Menu menu) {
+    public EvilMage() {
         super("mage", "enemy", new Spell("Cursed amulet", 3), new Potion("Satin cloak", 2), 14, 5);
-        this.menu = menu;
     }
     @Override
     public String getValue() {

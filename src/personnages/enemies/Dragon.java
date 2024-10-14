@@ -1,16 +1,14 @@
 package personnages.enemies;
 import board.Case;
+import equipement.defensif.Shield;
 import menu.EnemyMenu;
-import menu.Menu;
-import equipement.defensif.Potion;
 import equipement.offensif.Spell;
 import personnages.Personnage;
 
 public class Dragon extends Enemy implements Case {
 
-    public Dragon(Menu menu) {
-        super("dragon", "enemy", new Spell("Fire", 5), new Potion("Dragon skin", 4), 18, 8);
-        this.menu = menu;
+    public Dragon() {
+        super("dragon", "enemy", new Spell("Fire", 5), new Shield("Dragon skin", 4), 18, 8);
     }
     @Override
     public String getValue() {

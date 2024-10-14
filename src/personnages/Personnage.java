@@ -8,7 +8,7 @@ import equipement.EquipementOffensif;
 import equipement.EquipementDefensif;
 
 public abstract class Personnage {
-
+    protected boolean foundKey = false;
     protected int maxLife;
     protected String name;
     protected String type;
@@ -16,7 +16,7 @@ public abstract class Personnage {
     protected int attackStrength;
     protected EquipementOffensif equipmentOffensive;
     protected EquipementDefensif equipmentDefensif;
-    protected boolean foundKey = true;
+
 
     /* ! CONSTRUCTORS: */
     public Personnage() {
@@ -31,7 +31,6 @@ public abstract class Personnage {
         setName(name);
         setType(type);
     }
-
     public Personnage(String name, String type, int maxLife) {
         setName(name);
         setType(type);
@@ -63,22 +62,12 @@ public abstract class Personnage {
     public void newEquipementDefensif(EquipementDefensif newDefensif) {
         this.equipmentDefensif = newDefensif;
     }
-
     public void newEquipementOffensive(EquipementOffensif newWeapon) {
         this.equipmentOffensive = newWeapon;
     }
 
-    public void setMaxLife(int maxLife) {
-        this.maxLife = maxLife;
-    }
-
-    public void setFoundKey(boolean foundKey) {
-        this.foundKey = foundKey;
-    }
 
     /* ? GETTERS */
-    public int getMaxLife() { return maxLife; }
-
     public String getName() {
         return this.name;
     }
@@ -102,8 +91,7 @@ public abstract class Personnage {
     public EquipementDefensif getEquipmentDefensif() {
         return this.equipmentDefensif;
     }
-    public boolean isFoundKey() {return foundKey;
-    }
+
 
     /* ? METHODS */
     public String showPlayerStats() {
@@ -133,4 +121,15 @@ public abstract class Personnage {
         int opponentLife = opponent.getLife() + opponent.getEquipmentDefensif().getDefenseLevel();
         opponent.setLife(Math.max(0, opponentLife - damage));
     }
+
+    public void setMaxLife(int maxLife) {
+        this.maxLife = maxLife;
+    }
+
+    public int getMaxLife() { return maxLife; }
+    public void setFoundKey(boolean foundKey) {
+        this.foundKey = foundKey;
+    }
+
+    public boolean isFoundKey() {return foundKey;}
 }

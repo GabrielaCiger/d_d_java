@@ -158,7 +158,6 @@ public class Story extends Menu {
 
     public void gameEnd(Personnage personnage) {
         clearConsoleCommand();
-        System.out.println("[YOU WON! You reached the Temple. What might it be guarding?]\n\n");
         System.out.println("   `,.      .   .        *   .    .      .  _    ..          .\n" +
                 "     \\,~-.         *           .    .       ))       *    .\n" +
                 "          \\ *          .   .   |    *  . .  ~    .      .  .  ,\n" +
@@ -182,6 +181,7 @@ public class Story extends Menu {
                 "                     |     //=====\\\\     |\n" +
                 "                     |____//=======\\\\____|\n" +
                 "                         //=========\\\\ \n\n");
+        System.out.println("[YOU WON! You reached the Temple. What might it be guarding?]\n\n");
         endStoryChoiceFirstSwitch(endStoryChoiceFirst(), personnage);
     }
 
@@ -380,16 +380,17 @@ public class Story extends Menu {
             }
         }
         System.out.println("\n[Seems like the parrot won't talk to you anymore.]");
-        magicalRoomChoose();
+        magicalRoomSwitch(magicalRoomChoose(), personnage);
     }
 
     public void glassTable(Personnage personnage) {
         Scanner sc = new Scanner(System.in);
         String player = personnage.getName();
+        System.out.println("You approach a glass table.\n");
         if (!visitedGlassTable) {
-            System.out.println("You approach a glass table.\n");
             wait(2000);
             if (!destroyedBox) {
+                System.out.println("You see a small shiny object on it.\n");
                 System.out.println(ANSI_GREEN + player + ANSI_RESET + ": What a beautiful crystal box... I wonder what's inside.");
             } else {
                 System.out.println("The crystal box has splintered into countless tiny pieces, now spread like glittering dust on the floor.");
@@ -397,10 +398,9 @@ public class Story extends Menu {
             boxChoices(personnage);
             int choice = sc.nextInt();
             jewelryBox(personnage, choice);
-        } else {
-            System.out.println("You've already been here.");
         }
-        magicalRoomChoose();
+            System.out.println("You've already been here.");
+        magicalRoomSwitch(magicalRoomChoose(), personnage);
     }
 
     public void boxChoices(Personnage personnage) {
@@ -419,7 +419,7 @@ public class Story extends Menu {
     public void jewelryBox(Personnage personnage, int choice) {
         switch (choice) {
             case 1:
-                magicalRoomChoose();
+                magicalRoomSwitch(magicalRoomChoose(), personnage);
                 break;
             case 2:
                 if (!destroyedBox) {
@@ -446,16 +446,16 @@ public class Story extends Menu {
                         System.out.println("Seed suddenly cracked and revealed a small scroll inside. Was it your warm hand, that cracked it open?");
                         wait(1500);
                         System.out.println("You opened the scroll.");
-                        scroll();
+                        scroll(personnage);
                     }
                 }
             default:
-                magicalRoomChoose();
+                magicalRoomSwitch(magicalRoomChoose(), personnage);
                 break;
         }
     }
 
-    public void scroll() {
+    public void scroll(Personnage personnage) {
         Scanner scanner = new Scanner(System.in);
         int currentPage = 1;
         boolean reading = true;
@@ -478,7 +478,7 @@ public class Story extends Menu {
             }
         }
         visitedGlassTable = true;
-        magicalRoomChoose();
+        magicalRoomSwitch(magicalRoomChoose(), personnage);
     }
 
     public void printPage(String pageOne, String pageTwo, int currentPage) {

@@ -30,7 +30,7 @@ public class EnemyMenu extends Story {
     public void blessedByDragon(Personnage personnage) {
         System.out.println("[The dragon's fierce gaze softens as you kneel before her, recognizing your submission with a low, rumbling purr of approval.]");
         System.out.println("[As the mother of young hatchlings, she bestows upon you a rare blessing, imbuing you with the ancient Dragon Force in gratitude for sparing her life.]");
-        personnage.setAttackStrength(personnage.getAttackStrength() + 7);
+        personnage.setAttackStrength(personnage.getAttackStrength() + 2);
         System.out.println(ANSI_GREEN + "[Your attack power has increased! (See your stats.)]" + ANSI_RESET);
     }
     public void addStrengthFromDragon(Personnage personnage) {
@@ -136,7 +136,6 @@ public class EnemyMenu extends Story {
         mage.setMessage("He gazes at you with an unsettling intensity, his eyes gleaming like cold steel in the dim light.");
         mage.setAttackMessage(ANSI_RED + "[Mage cast a spell. (-" + mage.countAttackPower() + " HP) ]" + ANSI_RESET);
     }
-
     public static void nymph(Nymph nymph) {
         String image = ANSI_BLUE + ".    .       . . ..   . .    .\n" +
                 " .  .      .. ..   -    .. .      \n" +
@@ -163,7 +162,6 @@ public class EnemyMenu extends Story {
         nymph.setImage(image);
         nymph.setMessage("You sense an alluring presence ahead; a nymph stands gracefully, her smile hinting at both mischief and mercy.");
     }
-
     public static void nymphMessage(int nymphType, Personnage personnage) {
         System.out.println(ANSI_BLUE + "Voice" + ANSI_RESET + ": Come closer, " + personnage.getName() + "... Lay your head near my waters..." );
         System.out.println("[You followed the sweet voice to the shore. You laid down and felt asleep...]");

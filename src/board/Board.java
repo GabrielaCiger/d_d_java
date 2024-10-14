@@ -1,18 +1,11 @@
 package board;
 import equipement.HealingItem;
 import equipement.Key;
-import equipement.defensif.Potion;
-import equipement.defensif.Shield;
-import equipement.offensif.Spell;
-import equipement.offensif.Weapon;
+import equipement.defensif.*;
+import equipement.offensif.*;
 import personnages.*;
 import menu.Menu;
-import personnages.enemies.Dragon;
-import personnages.enemies.EvilMage;
-import personnages.enemies.Goblin;
-import personnages.enemies.Nymph;
-import personnages.heroes.Warrior;
-
+import personnages.enemies.*;
 import static displayutils.Colors.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,12 +15,12 @@ public class Board {
     Menu menu;
     Personnage personnage;
     int playerPosition = 1;
-
-    ArrayList<Case> boardCases = new ArrayList<>();
+    ArrayList<Case> boardCases;
 
     public Board(Personnage personnage, Menu menu) {
         this.personnage = personnage;
         this.menu = menu;
+        this.boardCases = new ArrayList<>();
         populateBoard();
     }
 
@@ -50,7 +43,6 @@ public class Board {
     public void movePlayer(int diceValue) {
         playerPosition += diceValue;
     }
-
     public void populateBoard() {
         BasicCase basicCase = new BasicCase(menu);
         addSpecialCases();
@@ -59,7 +51,6 @@ public class Board {
         }
         Collections.shuffle(boardCases);
     }
-
     public void addSpecialCases(){
         goblinMageCases(5);
         dragonCases(4);
@@ -69,23 +60,20 @@ public class Board {
         healingItems();
         boardCases.add(new Key());
     }
-
     public void goblinMageCases(int number) {
         for (int i = 0; i < number; i++) {
-            boardCases.add(new Goblin(menu));
-            boardCases.add(new EvilMage(menu));
+            boardCases.add(new Goblin());
+            boardCases.add(new EvilMage());
         }
     }
-
     public void dragonCases(int number) {
         for (int i = 0; i < number; i++) {
-            boardCases.add(new Dragon(menu));
+            boardCases.add(new Dragon());
         }
     }
-
     public void nymphCases(int number) {
         for (int i = 0; i < number; i++) {
-            boardCases.add(new Nymph(menu));
+            boardCases.add(new Nymph());
         }
     }
 

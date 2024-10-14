@@ -9,9 +9,8 @@ import personnages.Personnage;
 
 public class Goblin extends Enemy implements Case {
 
-    public Goblin(Menu menu) {
+    public Goblin() {
         super("goblin", "enemy", new Weapon("Wooden sword", 1), new Shield("Leather armor", 0), 12, 3);
-        this.menu = menu;
     }
 
     @Override
