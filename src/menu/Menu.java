@@ -1,5 +1,7 @@
 package menu;
 import displayutils.StringUtils;
+import personnages.Personnage;
+import personnages.enemies.Enemy;
 import personnages.heroes.Warrior;
 import personnages.heroes.Wizard;
 
@@ -243,13 +245,21 @@ public class Menu {
         System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
     }
 
+    public void throwDiceMessage(){
+        System.out.println("┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑\n");
+        System.out.println("You throw the magic dice. You see the dice rolling, when suddenly... it stops...");
+    }
+
+    public void fleeMessage(Personnage personnage) {
+        System.out.println(ANSI_GREEN + personnage.getName() + ANSI_RESET + ": I shall not tempt fate with such peril...");
+        System.out.println("[You choose to evade the dark foe. How far shall you flee, brave hero?]");
+        System.out.println("[With a flourish, you cast the enchanted dice to seek your sanctuary...]");
+    }
     /**
      * Displays the result of a dice throw, including a visual representation of the dice face.
      * @param diceThrow The result of the dice throw (1-6).
      */
-    public void showThrow(int diceThrow) {
-        System.out.println("┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑\n");
-        System.out.println("You throw the magic dice. You see the dice rolling, when suddenly... it stops...");
+    public void showThrow(int diceThrow) {;
         switch (diceThrow) {
             case 1:
                 System.out.println("    +-------+ ");

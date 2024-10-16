@@ -24,8 +24,9 @@ protected Menu menu;
      * @param personnage The current player throwing the dice.
      */
     @Override
-    public void doAction(Personnage personnage) {
+    public CaseInteractionEnding doAction(Personnage personnage) {
         EnemyMenu.emptyCase(personnage);
+        return CaseInteractionEnding.NONE;
     }
 
 }

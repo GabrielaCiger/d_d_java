@@ -1,5 +1,6 @@
 package personnages.enemies;
 import board.Case;
+import board.CaseInteractionEnding;
 import equipement.defensif.Shield;
 import equipement.offensif.Spell;
 import equipement.offensif.Weapon;
@@ -10,6 +11,9 @@ import personnages.heroes.Warrior;
 
 import java.awt.*;
 
+/**
+ * The NYMPH is a non-fightable enemy that influences the player's stats based on a randomly determined "mood," which can have either positive or negative effects.
+ */
 public class Nymph extends Enemy implements Case {
 
     public Nymph() {
@@ -22,10 +26,10 @@ public class Nymph extends Enemy implements Case {
     }
 
     @Override
-    public void doAction(Personnage personnage) {
+    public CaseInteractionEnding doAction(Personnage personnage) {
         EnemyMenu.nymph(this);
         EnemyMenu.encounterMessage(this);
-        applyEncounterChoice(EnemyMenu.showChoicesNymph(this), personnage);
+        return applyEncounterChoice(EnemyMenu.showChoicesNymph(this), personnage);
     }
     /**
      * Applies the encounter choice made by the player when interacting with a nymph.
@@ -44,7 +48,7 @@ public class Nymph extends Enemy implements Case {
      * <p>Choosing any other value results in a message indicating the player leaves
      * the encounter.</p>
      */
-    public void applyEncounterChoice(int choice, Personnage personnage) {
+    public CaseInteractionEnding applyEncounterChoice(int choice, Personnage personnage) {
         int nymphMood = badOrGood();
         if (choice == 1) {
             if (nymphMood==1) {
@@ -58,7 +62,9 @@ public class Nymph extends Enemy implements Case {
             EnemyMenu.nymphMessage(nymphMood, personnage);
         } else {
             enemyMenu.leaveEnemyMessage(this);
+            return CaseInteractionEnding.FLEE;
         }
+        return CaseInteractionEnding.NONE;
     }
 
     /**

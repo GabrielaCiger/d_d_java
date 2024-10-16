@@ -1,9 +1,9 @@
 package personnages.enemies;
 import board.Case;
+import board.CaseInteractionEnding;
 import equipement.defensif.Shield;
 import equipement.offensif.Weapon;
 import menu.EnemyMenu;
-import menu.Menu;
 import personnages.Personnage;
 
 
@@ -18,9 +18,10 @@ public class Goblin extends Enemy implements Case {
     }
 
     @Override
-    public void doAction(Personnage personnage) {
+    public CaseInteractionEnding doAction(Personnage personnage) {
         EnemyMenu.goblin(this);
         EnemyMenu.encounterMessage(this);
-        applyEncounterChoice(EnemyMenu.showChoices(this), personnage);
+        return applyEncounterChoice(EnemyMenu.showChoices(this), personnage);
     }
+
 }

@@ -1,5 +1,6 @@
 package personnages.enemies;
 import board.Case;
+import board.CaseInteractionEnding;
 import equipement.defensif.Shield;
 import menu.EnemyMenu;
 import equipement.offensif.Spell;
@@ -21,10 +22,10 @@ public class Dragon extends Enemy implements Case {
      * @param personnage the character performing the action during the encounter.
      */
     @Override
-    public void doAction(Personnage personnage) {
+    public CaseInteractionEnding doAction(Personnage personnage) {
         EnemyMenu.dragon(this);
         EnemyMenu.encounterMessage(this);
-        applyEncounterChoice(EnemyMenu.showChoices(this), personnage);
+        return applyEncounterChoice(EnemyMenu.showChoices(this), personnage);
     }
 
 }

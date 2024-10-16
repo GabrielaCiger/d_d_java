@@ -10,5 +10,5 @@ public interface Case {
      * This method may involve updating player attributes, applying effects, or triggering events.
      * @param personnage The current player who is affected by the action performed in this method.
      */
-    void doAction(Personnage personnage);
+    CaseInteractionEnding doAction(Personnage personnage);
 }

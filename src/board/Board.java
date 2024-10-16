@@ -180,10 +180,13 @@ public class Board {
     }
 
     /**
-     * Manages case interaction between player and the case type. Interaction is triggered by matching the player's and case's position.
-     * Calls the doAction of the object (implementing Case interface).
-     * @see Case;
-     * @param playerPosition Updated player's position. Called in the Game class.
+     * Executes the action for the case at the given player position.
+     * If the position is valid, it retrieves the current case,
+     * performs the action, and handles the result (fleeing or winning).
+     *
+     * Winning removes the enemy object from the board and substitutes it with the basic case.
+     *
+     * @param playerPosition The position of the player on the board.
      */
     public void doCaseAction(int playerPosition) {
         if (playerPosition >= boardSize) {
@@ -191,6 +194,35 @@ public class Board {
         }
         Case currentCase = boardCases.get(playerPosition);
         System.out.println("Current case value: " + ANSI_YELLOW + currentCase.getValue() + ANSI_RESET);
-        currentCase.doAction(personnage);
+        CaseInteractionEnding interactionEnding = currentCase.doAction(personnage);
+        switch (interactionEnding){
+            case FLEE -> this.playerPosition = playerRetreatFromFight();
+            case WIN -> boardCases.set(playerPosition, new BasicCase(menu));
+        }
+    }
+
+    /**
+     * Calculates the player's new position after retreating from a fight based
+     * on a dice roll. Displays the retreat value and the movement details.
+     * @return The new position of the player after retreating from the fight.
+     *         This value is calculated by subtracting the result of a dice roll
+     *         from the player's current position.
+     * @see #throwDice() for the method that generates the retreat value.
+     *      initial and new positions.
+     */
+    private int playerRetreatFromFight() {
+        int initialPos = this.playerPosition;
+        int retreatValue = throwDice();
+
+        int fleePosition = initialPos - retreatValue;
+        if (fleePosition < 0) {
+            fleePosition = 0;
+        }
+
+        menu.fleeMessage(personnage);
+        menu.showThrow(retreatValue);
+        menu.showPlayerMovement(initialPos, fleePosition);
+
+        return fleePosition;
     }
 }

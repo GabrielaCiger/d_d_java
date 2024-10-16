@@ -1,6 +1,7 @@
 package equipement;
 
 import board.Case;
+import board.CaseInteractionEnding;
 import menu.ChestMenu;
 import personnages.Personnage;
 
@@ -27,12 +28,13 @@ public class Key implements Case {
      * @param personnage The character who found the key.
      */
     @Override
-    public void doAction(Personnage personnage) {
+    public CaseInteractionEnding doAction(Personnage personnage) {
         ChestMenu.encounterMessage();
         int openChest = chestMenu.applyChoice(ChestMenu.showChoicesUnopened(), this.name, this.type, this.value);
         if (openChest == 1) {
             personnage.setFoundKey(true);
             chestMenu.foundKey();
         }
+        return CaseInteractionEnding.NONE;
     }
 }

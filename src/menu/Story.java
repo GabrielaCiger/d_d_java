@@ -153,7 +153,7 @@ public class Story extends Menu {
             return 2;
         }
         System.out.println(ANSI_RED + "Reaper" + ANSI_RESET + ": See you once more later, then..\n\n\n\n");
-        return 3;
+        return 4;
     }
 
     public void gameEnd(Personnage personnage) {

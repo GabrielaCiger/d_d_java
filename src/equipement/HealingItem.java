@@ -1,5 +1,6 @@
 package equipement;
 import board.Case;
+import board.CaseInteractionEnding;
 import menu.ChestMenu;
 import personnages.Personnage;
 
@@ -36,12 +37,13 @@ public class HealingItem implements Case {
      * @param personnage The character whose life values are being used to determine the healing amount.
      */
     @Override
-    public void doAction(Personnage personnage) {
+    public CaseInteractionEnding doAction(Personnage personnage) {
         ChestMenu.encounterMessage();
         int getHealed = chestMenu.applyChoice(ChestMenu.showChoicesUnopened(), this.name, this.type, this.healingValue);
         if (getHealed == 1) {
             healing(personnage);
         }
+        return CaseInteractionEnding.NONE;
     }
 
     /**
@@ -50,7 +52,7 @@ public class HealingItem implements Case {
      */
     public void healing(Personnage personnage) {
         int playerLife = personnage.getLife();
-        int healedPlayerLife = Math.max(healingValue, Math.min(playerLife + healingValue, personnage.getMaxLife()));
+        int healedPlayerLife = Math.min(playerLife + healingValue, personnage.getMaxLife());
         int healedValue = healedPlayerLife - personnage.getLife();
         personnage.setLife(healedPlayerLife);
         chestMenu.getHealedSuccess(this.name, healedValue);

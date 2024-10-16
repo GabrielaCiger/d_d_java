@@ -117,6 +117,7 @@ public class Game {
         int diceThrow = board.throwDice( );
         int initialPosition = board.getPlayerPosition();
 
+        menu.throwDiceMessage();
         menu.showThrow(diceThrow);
         board.movePlayer(diceThrow);
         int nextPosition = board.getPlayerPosition();

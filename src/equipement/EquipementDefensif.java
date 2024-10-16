@@ -1,5 +1,6 @@
 package equipement;
 import board.Case;
+import board.CaseInteractionEnding;
 import menu.ChestMenu;
 import personnages.Personnage;
 
@@ -34,12 +35,13 @@ public abstract class EquipementDefensif implements Case {
     }
 
     @Override
-    public void doAction(Personnage personnage) {
+    public CaseInteractionEnding doAction(Personnage personnage) {
         ChestMenu.encounterMessage();
         int getNew = chestMenu.applyChoice(ChestMenu.showChoicesUnopened(), this.name, this.type, this.defenseLevel);
         if(getNew == 1){
             getNewEquipement(personnage);
         }
+        return CaseInteractionEnding.NONE;
     }
 
     protected void getNewEquipement(Personnage personnage){}
