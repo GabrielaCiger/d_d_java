@@ -118,7 +118,7 @@ public class Story extends Menu {
         System.out.println(ANSI_RED + "[As you lie in darkness, a chilling breeze sweeps over you, whispering ancient secrets. \n From the shadows, a sinister and ethereal presence draws near, its form shifting like smoke, invoking dread in the depths of your soul...]" + ANSI_RESET);
         wait(3500);
         System.out.println("                    ___          \n" +
-                "                   /   \\        \n" +
+                "                 /   \\        \n" +
                 "              /\\ |" + ANSI_RED + " . ." + ANSI_RESET + " \\       \n" +
                 "            ////\\|     ||       \n" +
                 "          ////   \\ ___//\\       \n" +
@@ -271,14 +271,15 @@ public class Story extends Menu {
     }
 
     public void magicalRoomSwitch(int choice, Personnage personnage) {
-        switch (choice) {
-            case 1:
+        StoryOptions selectedOption = StoryOptions.fromValue(choice);
+        switch (selectedOption) {
+            case APPROACH_GLASSTABLE:
                 glassTable(personnage);
                 break;
-            case 2:
+            case APPROACH_BIRDCAGE:
                 birdCage(personnage);
                 break;
-            default:
+            case LEAVE_STORY:
                 boolean quit = quitGame(personnage.getName());
                 if (!quit) {
                     displayMenu();

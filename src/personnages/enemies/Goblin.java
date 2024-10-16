@@ -12,7 +12,6 @@ public class Goblin extends Enemy implements Case {
     public Goblin() {
         super("goblin", "enemy", new Weapon("Wooden sword", 1), new Shield("Leather armor", 0), 12, 3);
     }
-
     @Override
     public String getValue() {
         return "Enemy case";
@@ -24,6 +23,4 @@ public class Goblin extends Enemy implements Case {
         EnemyMenu.encounterMessage(this);
         applyEncounterChoice(EnemyMenu.showChoices(this), personnage);
     }
-
-
 }

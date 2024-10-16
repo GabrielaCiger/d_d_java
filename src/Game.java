@@ -1,10 +1,14 @@
 import board.PlayerOutOfBoardException;
 import board.Board;
+import menu.GameOptions;
 import menu.Menu;
+import menu.MenuOptions;
 import menu.Story;
 import personnages.Personnage;
 import personnages.heroes.Warrior;
 import personnages.heroes.Wizard;
+
+import java.util.List;
 
 import static displayutils.ConsoleUtils.clearConsoleCommand;
 
@@ -19,12 +23,17 @@ public class Game {
         this.story = new Story();
     }
 
+    /**
+     * Displays the main game menu and processes user choices to start or continue a game.
+     */
     public void gameMenu() {
         boolean running = true;
         while (running) {
             int choiceMenu = menu.displayMenu();
-            switch (choiceMenu) {
-                case 1:
+            MenuOptions selectedOption = MenuOptions.fromValue(choiceMenu);
+
+            switch (selectedOption) {
+                case START_GAME_WITH_INTRO:
                     clearConsoleCommand();
                     story.intro();
                     personnage = getPlayerInput();
@@ -32,18 +41,22 @@ public class Game {
                     clearConsoleCommand();
                     playGame();
                     break;
-                case 2:
+                case START_GAME_WITHOUT_INTRO:
                     personnage = getPlayerInput();
                     clearConsoleCommand();
                     playGame();
                     break;
-                default:
+                case QUIT_GAME:
                     running = !menu.quitGame("");
                     break;
             }
         }
     }
 
+    /**
+     * Prompts the user for player name and type, validates their choices,
+     * and returns a newly created Personnage object.
+     */
     private Personnage getPlayerInput() {
         String name;
         String type;
@@ -63,6 +76,12 @@ public class Game {
         return createPersonnage(name, type);
     }
 
+    /**
+     * Creates a new Personnage based on the specified type.
+     * @param name the name of the personnage
+     * @param type the type of the personnage, either "wizard" or "warrior"
+     * @return a new Personnage instance of the specified type
+     */
     public Personnage createPersonnage(String name, String type) {
         if (type.equals("wizard")) {
             return new Wizard(name);
@@ -70,6 +89,11 @@ public class Game {
         return new Warrior(name);
     }
 
+    /**
+     * Starts the game and manages the game rounds until completion.
+     * It initializes the game board and continuously runs rounds until the game is over,
+     * then displays the end story for the personnage.
+     */
     public void playGame() {
         this.board = new Board(personnage, menu);
         boolean gameOver = false;
@@ -81,6 +105,14 @@ public class Game {
         story.gameEnd(personnage);
     }
 
+    /**
+     * Executes a player's action during their turn, including throwing the dice,
+     * moving the player, and performing actions based on the new position on the board.
+     * Checks for player death and handles any exceptions for moving outside the board.
+     *
+     * @param board The game board on which the player is acting.
+     * @return true if the player reaches the end of the board; false otherwise.
+     */
     public boolean playerAction(Board board) {
         int diceThrow = board.throwDice( );
         int initialPosition = board.getPlayerPosition();
@@ -92,19 +124,29 @@ public class Game {
         menu.showPlayerMovement(initialPosition, nextPosition);
         board.doCaseAction(nextPosition);
 
+        if (personnage.getLife() < 1) {
+            playerDiedChoices(story.playerDied(personnage));
+        }
+        
         playerOutsideTheBoardException(board, initialPosition, nextPosition);
         return board.getPlayerPosition() == board.getBoardSize();
     }
 
-    public boolean gameRound() {
+    /**
+     * Executes a round of the game based on the player's choice,
+     * allowing for player actions, displaying stats, or quitting the game.
+     * @return true if the game ends; false otherwise.
+     */
+    private boolean gameRound() {
         int choice = menu.newRound();
-        switch (choice) {
-            case 1:
+        GameOptions selectedOption = GameOptions.fromValue(choice);
+        switch (selectedOption) {
+            case ROLL_DICE:
                 return playerAction(board);
-            case 2:
+            case SHOW_STATS:
                 System.out.println(personnage.showPlayerStats());
                 break;
-            case 3:
+            case QUIT_GAME:
                 System.out.println("[Is this adventure going to end?]");
                 boolean quit = menu.quitGame(personnage.getName());
                 return quit;
@@ -112,16 +154,20 @@ public class Game {
                 System.out.println("Invalid choice, please try again.");
                 break;
         }
-        if (personnage.getLife() < 1) {
-            playerDiedChoices(story.playerDied(personnage));
-        }
         return false;
     }
 
+    /**
+     * Handles the player's choices after dying, including the option to
+     * restart the game with the same character type and name or return
+     * to the main game menu.
+     * @param choice an integer representing the player's choice after death.
+     */
     public void playerDiedChoices(int choice) {
-        if (choice == 3) {
+        GameOptions selectedOption = GameOptions.fromValue(choice);
+        if (selectedOption == GameOptions.REPLAY_GAME) {
             Personnage savedSettings;
-            if (personnage.getType().equals("wizard")) {
+            if (personnage instanceof Wizard) {
                 savedSettings = new Wizard(personnage.getName());
             } else {
                 savedSettings = new Warrior(personnage.getName());
@@ -132,6 +178,16 @@ public class Game {
         gameMenu();
     }
 
+    /**
+     * Checks if the player's position exceeds the board's boundaries. If so,
+     * resets the player's position to the last known position and throws a
+     * PlayerOutOfBoardException, which is caught and handled to inform the
+     * player of the error.
+     * @throws PlayerOutOfBoardException;
+     * @param board the game board that contains the player's current position.
+     * @param initialPosition the player's last known valid position.
+     * @param nextPosition the player's attempted new position.
+     */
     public void playerOutsideTheBoardException(Board board, int initialPosition, int nextPosition) {
         try {
             if (board.getPlayerPosition() > board.getBoardSize()) {

@@ -1,9 +1,5 @@
 package personnages;
-
-import menu.Menu;
-
 import static displayutils.Colors.*;
-
 import equipement.EquipementOffensif;
 import equipement.EquipementDefensif;
 
@@ -66,6 +62,13 @@ public abstract class Personnage {
         this.equipmentOffensive = newWeapon;
     }
 
+    public void setMaxLife(int maxLife) {
+        this.maxLife = maxLife;
+    }
+
+    public void setFoundKey(boolean foundKey) {
+        this.foundKey = foundKey;
+    }
 
     /* ? GETTERS */
     public String getName() {
@@ -92,8 +95,16 @@ public abstract class Personnage {
         return this.equipmentDefensif;
     }
 
+    public int getMaxLife() { return maxLife; }
+
+    public boolean isFoundKey() {return foundKey;}
 
     /* ? METHODS */
+    /**
+     * Constructs and returns a string representation of the player's stats.
+     * @return a formatted string containing the player's name, HP, attack level,
+     *         damage (with equipped weapon information), and defense (with equipped defense information).
+     */
     public String showPlayerStats() {
         return "\n" +
                 "============================\n" +
@@ -112,24 +123,23 @@ public abstract class Personnage {
                 "============================\n";
     }
 
+    /**
+     * Calculates the total attack power of the player.
+     * @return the sum of the player's base attack strength and the attack level of the equipped offensive weapon.
+     */
     public int countAttackPower() {
         return this.attackStrength + this.equipmentOffensive.getAttackLevel();
     }
 
+    /**
+     * Performs an attack on the specified opponent, calculating damage based on the attacker's
+     * attack power and the opponent's defense.
+     * @param opponent the target character to be attacked.
+     */
     public void doAttack(Personnage opponent) {
         int damage = countAttackPower();
         int opponentLife = opponent.getLife() + opponent.getEquipmentDefensif().getDefenseLevel();
         opponent.setLife(Math.max(0, opponentLife - damage));
     }
 
-    public void setMaxLife(int maxLife) {
-        this.maxLife = maxLife;
-    }
-
-    public int getMaxLife() { return maxLife; }
-    public void setFoundKey(boolean foundKey) {
-        this.foundKey = foundKey;
-    }
-
-    public boolean isFoundKey() {return foundKey;}
 }

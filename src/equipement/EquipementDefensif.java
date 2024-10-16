@@ -24,7 +24,7 @@ public abstract class EquipementDefensif implements Case {
     public int getDefenseLevel() {
         return defenseLevel;
     }
-    public boolean betterDefenseLogic(Personnage personnage){
+    protected boolean betterDefenseLogic(Personnage personnage){
         return personnage.getEquipmentDefensif().getDefenseLevel() <= this.defenseLevel;
     }
 
@@ -38,11 +38,10 @@ public abstract class EquipementDefensif implements Case {
         ChestMenu.encounterMessage();
         int getNew = chestMenu.applyChoice(ChestMenu.showChoicesUnopened(), this.name, this.type, this.defenseLevel);
         if(getNew == 1){
-            chestMenu.getNewEquipmentSuccess(this.type);
             getNewEquipement(personnage);
         }
     }
 
-    public void getNewEquipement(Personnage personnage){}
+    protected void getNewEquipement(Personnage personnage){}
 
 }

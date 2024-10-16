@@ -15,6 +15,11 @@ public class Dragon extends Enemy implements Case {
         return "Enemy case";
     }
 
+    /**
+     * Executes an action for the given character during an encounter with an enemy.
+     * Displays the enemy menu and encounter message, and applies the player's choice.
+     * @param personnage the character performing the action during the encounter.
+     */
     @Override
     public void doAction(Personnage personnage) {
         EnemyMenu.dragon(this);

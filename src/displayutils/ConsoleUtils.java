@@ -1,5 +1,9 @@
 package displayutils;
-
+/**
+ *
+ * Class containing a method to be able to clear the console.
+ * @deprecated This class is not used, because it doesn't work on the Windows console. Needs to be changed.
+ */
 public class ConsoleUtils {
     public static void clearConsole() {
         try {

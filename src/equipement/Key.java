@@ -22,7 +22,10 @@ public class Key implements Case {
     public String getValue() {
         return "Bonus case";
     }
-
+    /**
+     * Encountering key object sets the player's foundKey attribute to true. It's necessary to unlock a part of the end story.
+     * @param personnage The character who found the key.
+     */
     @Override
     public void doAction(Personnage personnage) {
         ChestMenu.encounterMessage();

@@ -36,13 +36,12 @@ public abstract class EquipementOffensif implements Case {
         ChestMenu.encounterMessage();
         int getNew = chestMenu.applyChoice(ChestMenu.showChoicesUnopened(), this.name, this.type, this.attackLevel);
         if(getNew == 1){
-            chestMenu.getNewEquipmentSuccess(this.type);
             getNewEquipement(personnage);
         }
     }
-    public void getNewEquipement(Personnage personnage){}
+    protected void getNewEquipement(Personnage personnage){}
 
-    public boolean betterAttackLogic(Personnage personnage){
+    protected boolean betterAttackLogic(Personnage personnage){
         return personnage.getEquipmentDefensif().getDefenseLevel() <= this.attackLevel;
     }
 }

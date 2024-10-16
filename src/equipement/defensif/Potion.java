@@ -1,7 +1,10 @@
 package equipement.defensif;
 import board.Case;
 import equipement.EquipementDefensif;
+import menu.ChestMenu;
 import personnages.Personnage;
+import personnages.heroes.Wizard;
+
 import static displayutils.Colors.*;
 
 public class Potion extends EquipementDefensif implements Case {
@@ -15,10 +18,11 @@ public class Potion extends EquipementDefensif implements Case {
         this.type = "defense";
     }
     public void getNewEquipement(Personnage personnage) {
-        if (personnage.getType().contains("wizard")) {
+        if (personnage instanceof Wizard) {
             if (betterDefenseLogic(personnage)){
                 Potion newPotion = new Potion(this.name, this.defenseLevel);
                 personnage.newEquipementDefensif(newPotion);
+                ChestMenu.getNewEquipmentSuccess(newPotion.getDefenseWeaponName());
             } else {
                 System.out.println(ANSI_RED + "[Your current defense is stronger.]" + ANSI_RESET);
             }

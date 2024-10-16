@@ -17,6 +17,12 @@ protected Menu menu;
         return value;
     }
 
+    // TODO override ........
+
+    /**
+     * Empty case with no possible interaction. Displays message.
+     * @param personnage The current player throwing the dice.
+     */
     @Override
     public void doAction(Personnage personnage) {
         EnemyMenu.emptyCase(personnage);
