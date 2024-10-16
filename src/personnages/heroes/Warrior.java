@@ -11,4 +11,10 @@ public class Warrior extends Personnage {
         this.equipmentOffensive = new Weapon();
     }
 
+    public Warrior(String name, String type, int life, int maxLife, int strength, String weaponName, int weaponAttack, String shieldName, int shieldDefense) {
+        super(name, type, life, maxLife, strength);
+        this.equipmentOffensive = new Weapon(weaponName, weaponAttack);
+        this.equipmentDefensif = new Shield(shieldName, shieldDefense);
+    }
+
 }

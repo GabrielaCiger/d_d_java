@@ -15,7 +15,7 @@ public abstract class Personnage {
 
 
     /* ! CONSTRUCTORS: */
-    public Personnage() {
+    public Personnage(String name, String type, int life, int maxLife, int attackStrength) {
         this("Player");
     }
 
@@ -32,6 +32,14 @@ public abstract class Personnage {
         setType(type);
         this.maxLife = maxLife;
         setLife(maxLife);
+    }
+
+    public Personnage(String name, String type, int life, int maxLife, int attackStrength, String weaponName, int weaponAttack, String shieldName, int shieldDefense) {
+        setName(name);
+        setType(type);
+        this.life = life;
+        this.maxLife = maxLife;
+        this.attackStrength = attackStrength;
     }
 
     /* * SETTERS */
