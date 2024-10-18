@@ -3,8 +3,9 @@ package menu;
 public enum GameOptions {
     ROLL_DICE(1),
     SHOW_STATS(2),
-    QUIT_GAME(3),
-    REPLAY_GAME(4);
+    SAVE_CHARACTER(3),
+    QUIT_GAME(4),
+    REPLAY_GAME(5);
 
     private final int value;
 

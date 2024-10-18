@@ -30,7 +30,7 @@ public class Menu {
      */
     public int displayMenu() {
         displayStartMenu();
-        List<Integer> possibleChoices = List.of(1, 2, 3);
+        List<Integer> possibleChoices = List.of(1, 2, 3, 4);
         return getValidChoice(possibleChoices);
     }
 
@@ -58,7 +58,8 @@ public class Menu {
         System.out.println("      ⢯⣿⠏⣠⠞⠋⣠⡿⠋" + ANSI_RESET + "    Type the number: " + ANSI_RED + "                   ⠃⢸");
         System.out.println("       ⣸⠇⢠⣷⠞" + ANSI_RESET + "             1 < New game (story)        " + ANSI_RED);
         System.out.println("       ⣸⠇⢠⣷" + ANSI_RESET + "                2 < Skip intro        " + ANSI_RED);
-        System.out.println("       ⡟⠀⡿⠁" + ANSI_RESET + "                  3 < Exit  ");
+        System.out.println("       ⡟⠀⡿⠁" + ANSI_RESET + "                  3 < Show saved characters   " + ANSI_RED);
+        System.out.println("       ⡟⠀⠁" + ANSI_RESET + "                     4 < Exit  ");
         System.out.println("                     ============================");
         System.out.println(ANSI_RED + "                              ⠙⠻⠿⠿⠋⠀⢻⣿⡄");
         System.out.println("                          ⠈⠻⣿  ⣴⣶⣤⡀ ⢸⣿⠇⠀");
@@ -226,7 +227,7 @@ public class Menu {
      */
     public int newRound() {
         roundChoices();
-        List<Integer> gameRoundOptions = List.of(1, 2, 3);
+        List<Integer> gameRoundOptions = List.of(1, 2, 3, 4);
         int choice = getValidChoice(gameRoundOptions);
         return choice;
     }
@@ -241,7 +242,8 @@ public class Menu {
         System.out.println("        -----------------------");
         System.out.println("           1 < Throw dice.");
         System.out.println("           2 < Show stats.");
-        System.out.println("           3 < Quit adventure.");
+        System.out.println("           3 < Save character.");
+        System.out.println("           4 < Quit adventure.");
         System.out.println("┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙");
     }
 
@@ -333,6 +335,22 @@ public class Menu {
                 "     |______|     |______|\n\n\n" + ANSI_RESET);
     }
 
+    public void showSavedCharactersTable(Personnage hero, int index) {
+        String gameWonEmoji = hero.getWonGame() == 1 ? "\uD83D\uDC51" : "❌";
+        System.out.println("--------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%-8s%-20s%-10s%-8s%-30s%-30s%-10s%n",
+                index,
+                hero.getName(),
+                hero.getType(),
+                hero.getLife(),
+                hero.getEquipmentOffensive().getWeaponName(),
+                hero.getEquipmentDefensif().getDefenseWeaponName(),
+                gameWonEmoji);
+    }
+
+    public void headerTable(){
+        System.out.printf("%-8s%-20s%-10s%-8s%-20s%-20s%-10s%n", "ID", "Name", "Type", "Life", "Attack", "Defense", "Game won");
+    }
 
 }
 

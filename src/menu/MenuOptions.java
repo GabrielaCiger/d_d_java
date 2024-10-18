@@ -3,7 +3,8 @@ package menu;
 public enum MenuOptions {
     START_GAME_WITH_INTRO(1),
     START_GAME_WITHOUT_INTRO(2),
-    QUIT_GAME(3);
+    SHOW_SAVED_CHARACTERS_DB(3),
+    QUIT_GAME(4);
 
     private final int value;
 

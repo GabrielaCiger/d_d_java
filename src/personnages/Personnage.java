@@ -3,8 +3,15 @@ import static displayutils.Colors.*;
 import equipement.EquipementOffensif;
 import equipement.EquipementDefensif;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+
 public abstract class Personnage {
+    protected int id;
     protected boolean foundKey = false;
+    protected int wonGame = 0;
     protected int maxLife;
     protected String name;
     protected String type;
@@ -15,6 +22,8 @@ public abstract class Personnage {
 
 
     /* ! CONSTRUCTORS: */
+    public Personnage() {}
+
     public Personnage(String name, String type, int life, int maxLife, int attackStrength) {
         this("Player");
     }
@@ -28,8 +37,8 @@ public abstract class Personnage {
         setType(type);
     }
     public Personnage(String name, String type, int maxLife) {
-        setName(name);
-        setType(type);
+        this.name = name;
+        this.type = type;
         this.maxLife = maxLife;
         setLife(maxLife);
     }
@@ -49,6 +58,10 @@ public abstract class Personnage {
         } else {
             this.name = name;
         }
+    }
+
+    public void setWonGame(int wonGame) {
+        this.wonGame = wonGame;
     }
 
     public void setType(String type) {
@@ -107,6 +120,12 @@ public abstract class Personnage {
 
     public boolean isFoundKey() {return foundKey;}
 
+    public int getId() { return id; }
+
+    public int getHashId() { return this.id; }
+
+    public int getWonGame() { return wonGame; }
+
     /* ? METHODS */
     /**
      * Constructs and returns a string representation of the player's stats.
@@ -149,5 +168,12 @@ public abstract class Personnage {
         int opponentLife = opponent.getLife() + opponent.getEquipmentDefensif().getDefenseLevel();
         opponent.setLife(Math.max(0, opponentLife - damage));
     }
+
+    public int creationTimeHashed() {
+        Instant instant = Instant.now();
+        LocalDateTime now = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        return now.hashCode();
+    }
+
 
 }

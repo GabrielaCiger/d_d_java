@@ -1,5 +1,6 @@
 import board.PlayerOutOfBoardException;
 import board.Board;
+import database.GameDatabase;
 import menu.GameOptions;
 import menu.Menu;
 import menu.MenuOptions;
@@ -46,6 +47,9 @@ public class Game {
                     clearConsoleCommand();
                     playGame();
                     break;
+                case SHOW_SAVED_CHARACTERS_DB:
+                    showSavedCharacters();
+                    break;
                 case QUIT_GAME:
                     running = !menu.quitGame("");
                     break;
@@ -78,15 +82,20 @@ public class Game {
 
     /**
      * Creates a new Personnage based on the specified type.
+     *
      * @param name the name of the personnage
      * @param type the type of the personnage, either "wizard" or "warrior"
      * @return a new Personnage instance of the specified type
      */
     public Personnage createPersonnage(String name, String type) {
         if (type.equals("wizard")) {
-            return new Wizard(name);
+            Wizard newWizard = new Wizard(name);
+            GameDatabase.createHero(newWizard);
+            return newWizard;
         }
-        return new Warrior(name);
+        Warrior newWarrior = new Warrior(name);
+        GameDatabase.createHero(newWarrior);
+        return newWarrior;
     }
 
     /**
@@ -102,6 +111,8 @@ public class Game {
             gameOver = gameRound();
         }
         clearConsoleCommand();
+        personnage.setWonGame(1);
+        System.out.println(GameDatabase.changePlayerSavedData(personnage));
         story.gameEnd(personnage);
     }
 
@@ -114,7 +125,7 @@ public class Game {
      * @return true if the player reaches the end of the board; false otherwise.
      */
     public boolean playerAction(Board board) {
-        int diceThrow = board.throwDice( );
+        int diceThrow = board.throwDice();
         int initialPosition = board.getPlayerPosition();
 
         menu.throwDiceMessage();
@@ -128,7 +139,7 @@ public class Game {
         if (personnage.getLife() < 1) {
             playerDiedChoices(story.playerDied(personnage));
         }
-        
+
         playerOutsideTheBoardException(board, initialPosition, nextPosition);
         return board.getPlayerPosition() == board.getBoardSize();
     }
@@ -136,6 +147,7 @@ public class Game {
     /**
      * Executes a round of the game based on the player's choice,
      * allowing for player actions, displaying stats, or quitting the game.
+     *
      * @return true if the game ends; false otherwise.
      */
     private boolean gameRound() {
@@ -146,6 +158,9 @@ public class Game {
                 return playerAction(board);
             case SHOW_STATS:
                 System.out.println(personnage.showPlayerStats());
+                break;
+            case SAVE_CHARACTER:
+                System.out.println(GameDatabase.changePlayerSavedData(personnage));
                 break;
             case QUIT_GAME:
                 System.out.println("[Is this adventure going to end?]");
@@ -162,6 +177,7 @@ public class Game {
      * Handles the player's choices after dying, including the option to
      * restart the game with the same character type and name or return
      * to the main game menu.
+     *
      * @param choice an integer representing the player's choice after death.
      */
     public void playerDiedChoices(int choice) {
@@ -184,10 +200,11 @@ public class Game {
      * resets the player's position to the last known position and throws a
      * PlayerOutOfBoardException, which is caught and handled to inform the
      * player of the error.
-     * @throws PlayerOutOfBoardException;
-     * @param board the game board that contains the player's current position.
+     *
+     * @param board           the game board that contains the player's current position.
      * @param initialPosition the player's last known valid position.
-     * @param nextPosition the player's attempted new position.
+     * @param nextPosition    the player's attempted new position.
+     * @throws PlayerOutOfBoardException;
      */
     public void playerOutsideTheBoardException(Board board, int initialPosition, int nextPosition) {
         try {
@@ -199,6 +216,17 @@ public class Game {
         } catch (PlayerOutOfBoardException e) {
             System.out.println(e.getMessage());
             System.out.println("[Info : You went back to the position " + initialPosition + ".]");
+        }
+    }
+
+    public void showSavedCharacters() {
+        GameDatabase.getHeroes();
+        List<Personnage> heroes = GameDatabase.getHeroes();
+        menu.headerTable();
+        int i = 1;
+        for (Personnage hero : heroes) {
+            menu.showSavedCharactersTable(hero, i);
+            i++;
         }
     }
 
