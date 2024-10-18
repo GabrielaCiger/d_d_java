@@ -22,7 +22,7 @@ public enum StoryOptions {
             }
         }
         Menu.displayInvalidChoiceMessage();
-        throw new IllegalArgumentException("Invalid menu option value: " + value);
+        return APPROACH_GLASSTABLE;
     }
 
 }
