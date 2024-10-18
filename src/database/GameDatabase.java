@@ -5,22 +5,51 @@ import personnages.heroes.Wizard;
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
-
 import static displayutils.Colors.*;
 
 public class GameDatabase {
-    public static void main(String[] args) throws SQLException {
+    private static final String DATABASE_URL = "jdbc:sqlite:game_database.db";
+
+    public static void main(String[] args) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/js_game_database", "root", "");
-            System.out.println("Database connected");
-        } catch (Exception e) {
-            System.err.println("Something went wrong: " + e);
+            getConnection();
+            System.out.println("Database connected successfully.");
+            createHeroesTable();
+        } catch (SQLException e) {
+            System.err.println("Database connection failed: " + e.getMessage());
         }
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/js_game_database", "root", "");
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return DriverManager.getConnection(DATABASE_URL);
+    }
+
+    public static void createHeroesTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS heroes (" +
+                "hash_id INTEGER PRIMARY KEY," +
+                "name TEXT NOT NULL," +
+                "type TEXT NOT NULL," +
+                "life INTEGER," +
+                "max_life INTEGER," +
+                "strength INTEGER," +
+                "attack_name TEXT," +
+                "attack_value INTEGER," +
+                "defense_name TEXT," +
+                "defense_value INTEGER," +
+                "finished_game INTEGER DEFAULT 0)";
+
+        try (Connection con = getConnection();
+             Statement stmt = con.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Heroes table created successfully.");
+        } catch (SQLException e) {
+            System.err.println("Error creating heroes table: " + e.getMessage());
+        }
     }
 
     public static void createHero(Personnage personnage) {
